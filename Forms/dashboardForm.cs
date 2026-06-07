@@ -16,5 +16,10 @@ namespace Mabuhayone
         {
             InitializeComponent();
         }
+
+        private void dashboardForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -173,7 +173,7 @@ namespace Mabuhayone
         private void btnTask_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color2);//nav color highlight
-            OpenChildForm(new taskForm());
+            //OpenChildForm(new taskForm());
         }
 
         private void btnProfile_Click(object sender, EventArgs e)
