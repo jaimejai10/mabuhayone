@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Mabuhayone.Database;
+using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Crypto.Generators;
 using System;
 using System.Collections.Generic;
