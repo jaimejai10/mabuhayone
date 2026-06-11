@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using FontAwesome.Sharp;
 using Mabuhayone.Database;
 using Mabuhayone.Forms;
+using Mabuhayone.Sessions;
 using MySql.Data.MySqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -12,17 +13,17 @@ namespace Mabuhayone
     {
 
         private Size formSize;
-        private string username;
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
+        //private string username = UserSession.Username;
 
-        public mainForm(string username)
+
+        public mainForm()
         {
             InitializeComponent();
             //this.BackColor = Color.FromArgb(92, 102, 244);
             formSize = this.ClientSize;
-            this.username = username;
             CollapseMenu();
 
             leftBorderBtn = new Panel();
@@ -120,45 +121,11 @@ namespace Mabuhayone
             path.AddEllipse(0, 0, iconButton1.Width, iconButton1.Height);
             iconButton1.Region = new Region(path);
 
-            fetchusers();
+            lblFullname.Text = "Hi, " + UserSession.FullName;
+            lblPosition.Text = UserSession.Position;
+
         }
-        private void fetchusers()
-        {
-            DBConnection db = new DBConnection();
-            MySqlConnection conn = db.GetConnection();
 
-            try
-            {
-                conn.Open();
-
-                string query = "SELECT full_name, position FROM users WHERE username = @username";
-
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@username", username.Trim());
-
-                MySqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    string fullname = reader["full_name"]?.ToString() ?? "No Name";
-                    string position = reader["position"]?.ToString() ?? "No Position";
-                    lblFullname.Text = fullname;
-                    lblPosition.Text = position;
-                }
-                else
-                {
-                    lblFullname.Text = "User not found";
-                    lblPosition.Text = "User not found";
-                }
-
-                conn.Close();
-            }
-            catch
-            {
-                lblFullname.Text = "Error loading user";
-                lblPosition.Text = "Error loading user";
-            }
-        }
 
         private void panelMenu_Paint(object sender, PaintEventArgs e)
         {

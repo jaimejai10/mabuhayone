@@ -1,7 +1,4 @@
-﻿using Mabuhayone.Database;
-using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Crypto.Generators;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Mabuhayone.Database;
+using Mabuhayone.Sessions;
+using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Crypto.Generators;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 
@@ -66,9 +67,17 @@ namespace Mabuhayone
 
                     if (isValidPassword)
                     {
+                        // STORE SESSION
+                        UserSession.UserId = Convert.ToInt32(reader["user_id"]);
+                        UserSession.Username = reader["username"].ToString() ?? "";
+                        UserSession.FullName = reader["full_name"].ToString() ?? "";
+                        UserSession.Position = reader["position"].ToString() ?? "";
+                        UserSession.Role = reader["role"].ToString() ?? "";
+
+                        // OPEN MAIN FORM
                         this.Hide();
 
-                        mainForm main = new mainForm(username);
+                        mainForm main = new mainForm();
                         main.Show();
                     }
                     else
