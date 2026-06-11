@@ -128,3 +128,5 @@ C:\Users\Mahel Luis\Documents\mabuhayone\obj\Debug\net8.0-windows\refint\Mabuhay
 C:\Users\Mahel Luis\Documents\mabuhayone\obj\Debug\net8.0-windows\Mabuhayone.pdb
 C:\Users\Mahel Luis\Documents\mabuhayone\obj\Debug\net8.0-windows\Mabuhayone.genruntimeconfig.cache
 C:\Users\Mahel Luis\Documents\mabuhayone\obj\Debug\net8.0-windows\ref\Mabuhayone.dll
+C:\Users\Mahel Luis\Documents\mabuhayone\bin\Debug\net8.0-windows\WinForms.DataVisualization.Utilities.dll
+C:\Users\Mahel Luis\Documents\mabuhayone\bin\Debug\net8.0-windows\WinForms.DataVisualization.dll

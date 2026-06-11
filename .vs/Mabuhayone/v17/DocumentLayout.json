@@ -3,20 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Mahel Luis\\Documents\\mabuhayone\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{14CB18C6-6EC3-BADA-ED99-D93B04BF4559}|Mabuhayone.csproj|c:\\users\\mahel luis\\documents\\mabuhayone\\forms\\dashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{14CB18C6-6EC3-BADA-ED99-D93B04BF4559}|Mabuhayone.csproj|solutionrelative:forms\\dashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{14CB18C6-6EC3-BADA-ED99-D93B04BF4559}|Mabuhayone.csproj|c:\\users\\mahel luis\\documents\\mabuhayone\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{14CB18C6-6EC3-BADA-ED99-D93B04BF4559}|Mabuhayone.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{14CB18C6-6EC3-BADA-ED99-D93B04BF4559}|Mabuhayone.csproj|c:\\users\\mahel luis\\documents\\mabuhayone\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{14CB18C6-6EC3-BADA-ED99-D93B04BF4559}|Mabuhayone.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{14CB18C6-6EC3-BADA-ED99-D93B04BF4559}|Mabuhayone.csproj|c:\\users\\mahel luis\\documents\\mabuhayone\\forms\\dashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{14CB18C6-6EC3-BADA-ED99-D93B04BF4559}|Mabuhayone.csproj|solutionrelative:forms\\dashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14CB18C6-6EC3-BADA-ED99-D93B04BF4559}|Mabuhayone.csproj|c:\\users\\mahel luis\\documents\\mabuhayone\\forms\\dashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{14CB18C6-6EC3-BADA-ED99-D93B04BF4559}|Mabuhayone.csproj|solutionrelative:forms\\dashboardform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,56 +22,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "mainForm.cs",
-              "DocumentMoniker": "C:\\Users\\Mahel Luis\\Documents\\mabuhayone\\mainForm.cs",
-              "RelativeDocumentMoniker": "mainForm.cs",
-              "ToolTip": "C:\\Users\\Mahel Luis\\Documents\\mabuhayone\\mainForm.cs",
-              "RelativeToolTip": "mainForm.cs",
-              "ViewState": "AgIAAJ8AAAAAAAAAAAAlwK8AAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T15:32:01.421Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "dashboardForm.cs",
-              "DocumentMoniker": "C:\\Users\\Mahel Luis\\Documents\\mabuhayone\\Forms\\dashboardForm.cs",
-              "RelativeDocumentMoniker": "Forms\\dashboardForm.cs",
-              "ToolTip": "C:\\Users\\Mahel Luis\\Documents\\mabuhayone\\Forms\\dashboardForm.cs",
-              "RelativeToolTip": "Forms\\dashboardForm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAlwBUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T15:31:13.447Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "dashboardForm.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\Mahel Luis\\Documents\\mabuhayone\\Forms\\dashboardForm.cs",
-              "RelativeDocumentMoniker": "Forms\\dashboardForm.cs",
-              "ToolTip": "C:\\Users\\Mahel Luis\\Documents\\mabuhayone\\Forms\\dashboardForm.cs [Design]",
-              "RelativeToolTip": "Forms\\dashboardForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T15:30:31.753Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "mainForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Mahel Luis\\Documents\\mabuhayone\\mainForm.cs",
               "RelativeDocumentMoniker": "mainForm.cs",
               "ToolTip": "C:\\Users\\Mahel Luis\\Documents\\mabuhayone\\mainForm.cs [Design]",
               "RelativeToolTip": "mainForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-07T15:20:56.901Z",
+              "WhenOpened": "2026-06-11T13:00:11.438Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "dashboardForm.cs",
+              "DocumentMoniker": "C:\\Users\\Mahel Luis\\Documents\\mabuhayone\\Forms\\dashboardForm.cs",
+              "RelativeDocumentMoniker": "Forms\\dashboardForm.cs",
+              "ToolTip": "C:\\Users\\Mahel Luis\\Documents\\mabuhayone\\Forms\\dashboardForm.cs",
+              "RelativeToolTip": "Forms\\dashboardForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T12:15:28.143Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "dashboardForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Mahel Luis\\Documents\\mabuhayone\\Forms\\dashboardForm.cs",
+              "RelativeDocumentMoniker": "Forms\\dashboardForm.cs",
+              "ToolTip": "C:\\Users\\Mahel Luis\\Documents\\mabuhayone\\Forms\\dashboardForm.cs [Design]",
+              "RelativeToolTip": "Forms\\dashboardForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T11:34:29.269Z",
               "EditorCaption": " [Design]"
             }
           ]

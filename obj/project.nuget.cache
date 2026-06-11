@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5PyLDGE4Bvg=",
+  "dgSpecHash": "HHbKZzBNTYk=",
   "success": true,
   "projectFilePath": "C:\\Users\\Mahel Luis\\Documents\\mabuhayone\\Mabuhayone.csproj",
   "expectedPackageFiles": [
@@ -18,6 +18,7 @@
     "C:\\Users\\Mahel Luis\\.nuget\\packages\\system.security.cryptography.protecteddata\\8.0.0\\system.security.cryptography.protecteddata.8.0.0.nupkg.sha512",
     "C:\\Users\\Mahel Luis\\.nuget\\packages\\system.security.permissions\\8.0.0\\system.security.permissions.8.0.0.nupkg.sha512",
     "C:\\Users\\Mahel Luis\\.nuget\\packages\\system.windows.extensions\\8.0.0\\system.windows.extensions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Mahel Luis\\.nuget\\packages\\winforms.datavisualization\\1.10.2\\winforms.datavisualization.1.10.2.nupkg.sha512",
     "C:\\Users\\Mahel Luis\\.nuget\\packages\\zstdsharp.port\\0.8.6\\zstdsharp.port.0.8.6.nupkg.sha512"
   ],
   "logs": []
