@@ -37,9 +37,6 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             panelHeaderDate = new Panel();
             lblFilterStatus = new Label();
             btnYesterday = new Button();
@@ -60,7 +57,9 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            chart3 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            groupBox1 = new GroupBox();
+            label3 = new Label();
+            dgvUserPerformance = new DataGridView();
             tableLayoutPanelSummaryCards = new TableLayoutPanel();
             panel5 = new Panel();
             lblOverdueCount = new Label();
@@ -87,7 +86,8 @@
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chart2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)chart3).BeginInit();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvUserPerformance).BeginInit();
             tableLayoutPanelSummaryCards.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
@@ -212,7 +212,7 @@
             panelDataGrid.Controls.Add(label1);
             panelDataGrid.Controls.Add(dataGridView1);
             panelDataGrid.Dock = DockStyle.Top;
-            panelDataGrid.Location = new Point(10, 360);
+            panelDataGrid.Location = new Point(10, 361);
             panelDataGrid.Margin = new Padding(0);
             panelDataGrid.Name = "panelDataGrid";
             panelDataGrid.Size = new Size(947, 374);
@@ -249,7 +249,7 @@
             // 
             panelRecentActivity.Controls.Add(chart4);
             panelRecentActivity.Dock = DockStyle.Right;
-            panelRecentActivity.Location = new Point(957, 360);
+            panelRecentActivity.Location = new Point(957, 361);
             panelRecentActivity.Name = "panelRecentActivity";
             panelRecentActivity.Padding = new Padding(10, 0, 0, 0);
             panelRecentActivity.Size = new Size(200, 364);
@@ -279,13 +279,13 @@
             tableLayoutPanelAnalyticsRow.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanelAnalyticsRow.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 350F));
             tableLayoutPanelAnalyticsRow.Controls.Add(flowLayoutPanel1, 0, 0);
-            tableLayoutPanelAnalyticsRow.Controls.Add(chart3, 1, 0);
+            tableLayoutPanelAnalyticsRow.Controls.Add(groupBox1, 1, 0);
             tableLayoutPanelAnalyticsRow.Dock = DockStyle.Top;
             tableLayoutPanelAnalyticsRow.Location = new Point(10, 100);
             tableLayoutPanelAnalyticsRow.Name = "tableLayoutPanelAnalyticsRow";
             tableLayoutPanelAnalyticsRow.RowCount = 1;
             tableLayoutPanelAnalyticsRow.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanelAnalyticsRow.Size = new Size(1147, 260);
+            tableLayoutPanelAnalyticsRow.Size = new Size(1147, 261);
             tableLayoutPanelAnalyticsRow.TabIndex = 8;
             // 
             // flowLayoutPanel1
@@ -297,7 +297,7 @@
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Margin = new Padding(0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(797, 260);
+            flowLayoutPanel1.Size = new Size(797, 261);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // chart1
@@ -334,23 +334,43 @@
             chart2.TabIndex = 1;
             chart2.Text = "chart2";
             // 
-            // chart3
+            // groupBox1
             // 
-            chartArea4.Name = "ChartArea1";
-            chart3.ChartAreas.Add(chartArea4);
-            chart3.Dock = DockStyle.Fill;
-            legend4.Name = "Legend1";
-            chart3.Legends.Add(legend4);
-            chart3.Location = new Point(797, 0);
-            chart3.Margin = new Padding(0, 0, 0, 10);
-            chart3.Name = "chart3";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            chart3.Series.Add(series4);
-            chart3.Size = new Size(350, 250);
-            chart3.TabIndex = 1;
-            chart3.Text = "chart3";
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(dgvUserPerformance);
+            groupBox1.Location = new Point(797, 0);
+            groupBox1.Margin = new Padding(0, 0, 0, 10);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(350, 251);
+            groupBox1.TabIndex = 2;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "User Performance";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(33, 223);
+            label3.Name = "label3";
+            label3.Size = new Size(287, 15);
+            label3.TabIndex = 1;
+            label3.Text = "GOOD (80–100%) | AVERAGE (50–79%) | LOW (0–49%)";
+            // 
+            // dgvUserPerformance
+            // 
+            dgvUserPerformance.AllowUserToAddRows = false;
+            dgvUserPerformance.AllowUserToDeleteRows = false;
+            dgvUserPerformance.AllowUserToResizeColumns = false;
+            dgvUserPerformance.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dgvUserPerformance.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvUserPerformance.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvUserPerformance.Location = new Point(6, 22);
+            dgvUserPerformance.Name = "dgvUserPerformance";
+            dgvUserPerformance.ReadOnly = true;
+            dgvUserPerformance.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvUserPerformance.Size = new Size(338, 195);
+            dgvUserPerformance.TabIndex = 0;
+            dgvUserPerformance.CellContentClick += dgvUserPerformance_CellContentClick;
             // 
             // tableLayoutPanelSummaryCards
             // 
@@ -575,7 +595,9 @@
             flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
             ((System.ComponentModel.ISupportInitialize)chart2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)chart3).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvUserPerformance).EndInit();
             tableLayoutPanelSummaryCards.ResumeLayout(false);
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
@@ -603,7 +625,6 @@
         private FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart3;
         private TableLayoutPanel tableLayoutPanelSummaryCards;
         private Panel panel5;
         private Label lblOverdueCount;
@@ -628,5 +649,8 @@
         private Button btnThisYear;
         private Button btnYesterday;
         private Label lblFilterStatus;
+        private GroupBox groupBox1;
+        private DataGridView dgvUserPerformance;
+        private Label label3;
     }
 }

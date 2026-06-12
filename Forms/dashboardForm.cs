@@ -27,11 +27,9 @@ namespace Mabuhayone
         {
             isFilterActive = false;
 
-            LoadSummaryCards(); // ALWAYS GLOBAL
-
-            SetFilter("Last7Days");
+            LoadSummaryCards();
+            LoadUserPerformance();
             //LoadPieChart();
-            //LoadUserPerformance();
             //LoadWorkloadTrend();
             //LoadNotifications();
         }
@@ -179,6 +177,8 @@ namespace Mabuhayone
 
         private void SetFilter(string type)
         {
+            DateTime today = DateTime.Today;
+
             switch (type)
             {
                 case "Today":
@@ -191,39 +191,37 @@ namespace Mabuhayone
                     filterEndDate = DateTime.Today.AddDays(-1);
                     break;
 
-                case "Last7Days":
-                    filterStartDate = DateTime.Today.AddDays(-6);
-                    filterEndDate = DateTime.Today;
+                case "ThisWeek":
+
+                    int diff = (int)today.DayOfWeek;
+                    if (diff == 0) diff = 7; // fix Sunday
+
+                    filterStartDate = today.AddDays(-(diff - 1)); // Monday
+                    filterEndDate = today; // up to today
                     break;
 
                 case "ThisMonth":
-                    filterStartDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-                    filterEndDate = DateTime.Today;
+
+                    filterStartDate = new DateTime(today.Year, today.Month, 1);
+                    filterEndDate = today;
                     break;
 
                 case "ThisYear":
-                    filterStartDate = new DateTime(DateTime.Today.Year, 1, 1);
-                    filterEndDate = DateTime.Today;
+                    filterStartDate = new DateTime(today.Year, 1, 1);
+                    filterEndDate = today;
                     break;
+
             }
 
             LoadSummaryCards();
+            LoadUserPerformance();
         }
 
         private void btnThisYear_Click(object sender, EventArgs e)
         {
             isFilterActive = true;
-
-            DateTime today = DateTime.Today;
-
-            filterStartDate = new DateTime(today.Year, 1, 1);
-            filterEndDate = today;
-
-            MessageBox.Show("Start: " + filterStartDate.ToString("yyyy-MM-dd") + "\nEnd: " + filterEndDate.ToString("yyyy-MM-dd"));
-
+            SetFilter("ThisYear");
             lblFilterStatus.Text = "This Year";
-
-            LoadSummaryCards();
         }
 
         private void btnCustomDate_Click(object sender, EventArgs e)
@@ -247,51 +245,139 @@ namespace Mabuhayone
             lblFilterStatus.Text = $"Custom: {filterStartDate:yyyy-MM-dd} to {filterEndDate:yyyy-MM-dd}";
 
             LoadSummaryCards();
+            LoadUserPerformance();
         }
 
         private void btnThisMonth_Click(object sender, EventArgs e)
         {
             isFilterActive = true;
-
-            DateTime today = DateTime.Today;
-
-            filterStartDate = new DateTime(today.Year, today.Month, 1);
-            filterEndDate = today;
-
-            //MessageBox.Show("Start: " + filterStartDate.ToString("yyyy-MM-dd") +"\nEnd: " + filterEndDate.ToString("yyyy-MM-dd"));
-
+            SetFilter("ThisMonth");
             lblFilterStatus.Text = "This Month";
-
-            LoadSummaryCards();
         }
 
         private void btnYesterday_Click(object sender, EventArgs e)
         {
             isFilterActive = true;
-
-            filterStartDate = DateTime.Today.AddDays(-1);
-            filterEndDate = DateTime.Today.AddDays(-1);
-
-            LoadSummaryCards();
+            SetFilter("Yesterday");
+            lblFilterStatus.Text = "Yesterday";
         }
 
         private void btnThisWeek_Click(object sender, EventArgs e)
         {
             isFilterActive = true;
-
-            DateTime today = DateTime.Today;
-
-            int diff = (int)today.DayOfWeek;
-            if (diff == 0) diff = 7; // fix Sunday
-
-            filterStartDate = today.AddDays(-(diff - 1)); // Monday
-            filterEndDate = today; // up to today
-
-           // MessageBox.Show("Start: " + filterStartDate.ToString("yyyy-MM-dd") +"\nEnd: " + filterEndDate.ToString("yyyy-MM-dd"));
-
+            SetFilter("ThisWeek");
+            //MessageBox.Show("Start: " + filterStartDate.ToString("yyyy-MM-dd") +"\nEnd: " + filterEndDate.ToString("yyyy-MM-dd"));
             lblFilterStatus.Text = "This Week";
+        }
 
-            LoadSummaryCards();
+
+        private void LoadUserPerformance()
+        {
+            DBConnection db = new DBConnection();
+            MySqlConnection conn = db.GetConnection();
+
+            try
+            {
+                conn.Open();
+
+                string query = @"
+                    SELECT 
+                        u.full_name AS Employee,
+
+                        COUNT(t.task_id) AS TotalTasks,
+
+                        SUM(CASE WHEN t.status = 'completed' THEN 1 ELSE 0 END) AS Completed,
+
+                        SUM(CASE WHEN t.status = 'in_progress' THEN 1 ELSE 0 END) AS InProgress,
+
+                        SUM(CASE WHEN t.status = 'pending' THEN 1 ELSE 0 END) AS Pending,
+
+                        ROUND(
+                            (SUM(CASE WHEN t.status = 'completed' THEN 1 ELSE 0 END) / NULLIF(COUNT(t.task_id),0)) * 100,
+                            0
+                        ) AS CompletionRate
+
+                    FROM tasks t
+                    INNER JOIN users u ON u.user_id = t.assigned_to
+                    WHERE (@start IS NULL OR t.created_at BETWEEN @start AND @end)
+                    GROUP BY u.user_id, u.full_name;
+                    ";
+
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                if (isFilterActive)
+                {
+                    cmd.Parameters.AddWithValue("@start", filterStartDate.Date);
+                    cmd.Parameters.AddWithValue("@end", filterEndDate.Date);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@start", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@end", DBNull.Value);
+                }
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                if (!dt.Columns.Contains("Status"))
+                {
+                    dt.Columns.Add("Status", typeof(string));
+                }
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    double percent = row["CompletionRate"] == DBNull.Value
+                        ? 0
+                        : Convert.ToDouble(row["CompletionRate"]);
+
+                    if (percent >= 80)
+                        row["Status"] = "🟢 Good";
+                    else if (percent >= 50)
+                        row["Status"] = "🟡 Average";
+                    else
+                        row["Status"] = "🔴 Low";
+                }
+
+                dt.DefaultView.Sort = "CompletionRate DESC";
+                dt = dt.DefaultView.ToTable();
+
+                dgvUserPerformance.DataSource = dt;
+
+                foreach (DataGridViewRow row in dgvUserPerformance.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    double percent = Convert.ToDouble(row.Cells["CompletionRate"].Value);
+
+                    if (percent >= 80)
+                        row.DefaultCellStyle.BackColor = Color.LightGreen;
+                    else if (percent >= 50)
+                        row.DefaultCellStyle.BackColor = Color.Khaki;
+                    else
+                        row.DefaultCellStyle.BackColor = Color.LightCoral;
+                }
+
+                dgvUserPerformance.AllowUserToOrderColumns = false;
+
+                foreach (DataGridViewColumn col in dgvUserPerformance.Columns)
+                {
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("User Performance Error: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void dgvUserPerformance_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
