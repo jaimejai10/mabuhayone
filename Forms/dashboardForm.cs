@@ -14,6 +14,7 @@ namespace Mabuhayone
 {
     public partial class dashboardForm : Form
     {
+        private bool isFilterActive = false;
         private DateTime filterStartDate;
         private DateTime filterEndDate;
 
@@ -24,6 +25,7 @@ namespace Mabuhayone
 
         private void dashboardForm_Load(object sender, EventArgs e)
         {
+            isFilterActive = false;
 
             LoadSummaryCards(); // ALWAYS GLOBAL
 
@@ -77,36 +79,81 @@ namespace Mabuhayone
             {
                 conn.Open();
 
-                string query = @"
-                    SELECT
-                        (SELECT COUNT(*) FROM tasks) AS total_tasks,
-                        (SELECT COUNT(*) FROM tasks WHERE status = 'pending') AS pending_tasks,
-                        (SELECT COUNT(*) FROM tasks WHERE status = 'in_progress') AS in_progress_tasks,
-                        (SELECT COUNT(*) FROM tasks 
-                         WHERE due_date < CURDATE() 
-                         AND status <> 'completed') AS overdue_tasks;
-                    ";
+                string query;
+
+                if (!isFilterActive)
+                {
+                    // OVERALL DASHBOARD
+                    query = @"
+            SELECT
+                (SELECT COUNT(*) FROM tasks) AS total_tasks,
+
+                (SELECT COUNT(*) FROM tasks
+                 WHERE status = 'pending') AS pending_tasks,
+
+                (SELECT COUNT(*) FROM tasks
+                 WHERE status = 'in_progress') AS in_progress_tasks,
+
+                (SELECT COUNT(*) FROM tasks
+                 WHERE due_date < CURDATE()
+                 AND status <> 'completed') AS overdue_tasks;
+            ";
+                }
+                else
+                {
+                    // FILTERED DASHBOARD
+                    query = @"
+            SELECT
+                (SELECT COUNT(*) FROM tasks
+                 WHERE DATE(created_at) BETWEEN @start AND @end) AS total_tasks,
+
+                (SELECT COUNT(*) FROM tasks
+                 WHERE status = 'pending'
+                 AND DATE(created_at) BETWEEN @start AND @end) AS pending_tasks,
+
+                (SELECT COUNT(*) FROM tasks
+                 WHERE status = 'in_progress'
+                 AND DATE(created_at) BETWEEN @start AND @end) AS in_progress_tasks,
+
+                (SELECT COUNT(*) FROM tasks
+                 WHERE due_date < CURDATE()
+                 AND status <> 'completed'
+                 AND DATE(created_at) BETWEEN @start AND @end) AS overdue_tasks;
+            ";
+                }
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
 
+                if (isFilterActive)
+                {
+                    cmd.Parameters.AddWithValue("@start", filterStartDate.Date);
+                    cmd.Parameters.AddWithValue("@end", filterEndDate.Date);
+                }
+
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
-                    if (reader.HasRows && reader.Read())
+                    if (reader.Read())
                     {
-                        DashboardCache.TotalTasks = reader.GetInt32("total_tasks");
-                        DashboardCache.Pending = reader.GetInt32("pending_tasks");
-                        DashboardCache.InProgress = reader.GetInt32("in_progress_tasks");
-                        DashboardCache.Overdue = reader.GetInt32("overdue_tasks");
+                        DashboardCache.TotalTasks = Convert.ToInt32(reader["total_tasks"]);
+                        DashboardCache.Pending = Convert.ToInt32(reader["pending_tasks"]);
+                        DashboardCache.InProgress = Convert.ToInt32(reader["in_progress_tasks"]);
+                        DashboardCache.Overdue = Convert.ToInt32(reader["overdue_tasks"]);
                     }
                 }
 
-                // TODAY TASKS (SAFE EXECUTION)
-                string todayQuery = @"SELECT COUNT(*) FROM tasks WHERE DATE(created_at) = CURDATE();";
+                // TODAY TASKS ALWAYS TODAY
+                string todayQuery = @"
+        SELECT COUNT(*)
+        FROM tasks
+        WHERE DATE(created_at) = CURDATE();
+        ";
 
                 MySqlCommand cmdToday = new MySqlCommand(todayQuery, conn);
+
                 object result = cmdToday.ExecuteScalar();
 
-                DashboardCache.TodayTasks = (result != null) ? Convert.ToInt32(result) : 0;
+                DashboardCache.TodayTasks =
+                    result != null ? Convert.ToInt32(result) : 0;
 
                 DashboardCache.LastUpdated = DateTime.Now;
 
@@ -165,27 +212,86 @@ namespace Mabuhayone
 
         private void btnThisYear_Click(object sender, EventArgs e)
         {
-            SetFilter("ThisYear");
+            isFilterActive = true;
+
+            DateTime today = DateTime.Today;
+
+            filterStartDate = new DateTime(today.Year, 1, 1);
+            filterEndDate = today;
+
+            MessageBox.Show("Start: " + filterStartDate.ToString("yyyy-MM-dd") + "\nEnd: " + filterEndDate.ToString("yyyy-MM-dd"));
+
+            lblFilterStatus.Text = "This Year";
+
+            LoadSummaryCards();
         }
 
         private void btnCustomDate_Click(object sender, EventArgs e)
         {
+            if (dtpStartDate.Value.Date > dtpEndDate.Value.Date)
+            {
+                MessageBox.Show(
+                    "Start Date cannot be greater than End Date.",
+                    "Invalid Date Range",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
 
+                return;
+            }
+
+            isFilterActive = true;
+
+            filterStartDate = dtpStartDate.Value.Date;
+            filterEndDate = dtpEndDate.Value.Date;
+
+            lblFilterStatus.Text = $"Custom: {filterStartDate:yyyy-MM-dd} to {filterEndDate:yyyy-MM-dd}";
+
+            LoadSummaryCards();
         }
 
         private void btnThisMonth_Click(object sender, EventArgs e)
         {
-            SetFilter("ThisMonth");
+            isFilterActive = true;
+
+            DateTime today = DateTime.Today;
+
+            filterStartDate = new DateTime(today.Year, today.Month, 1);
+            filterEndDate = today;
+
+            //MessageBox.Show("Start: " + filterStartDate.ToString("yyyy-MM-dd") +"\nEnd: " + filterEndDate.ToString("yyyy-MM-dd"));
+
+            lblFilterStatus.Text = "This Month";
+
+            LoadSummaryCards();
         }
 
         private void btnYesterday_Click(object sender, EventArgs e)
         {
-            SetFilter("Yesterday");
+            isFilterActive = true;
+
+            filterStartDate = DateTime.Today.AddDays(-1);
+            filterEndDate = DateTime.Today.AddDays(-1);
+
+            LoadSummaryCards();
         }
 
         private void btnThisWeek_Click(object sender, EventArgs e)
         {
-            SetFilter("Last7Days");
+            isFilterActive = true;
+
+            DateTime today = DateTime.Today;
+
+            int diff = (int)today.DayOfWeek;
+            if (diff == 0) diff = 7; // fix Sunday
+
+            filterStartDate = today.AddDays(-(diff - 1)); // Monday
+            filterEndDate = today; // up to today
+
+           // MessageBox.Show("Start: " + filterStartDate.ToString("yyyy-MM-dd") +"\nEnd: " + filterEndDate.ToString("yyyy-MM-dd"));
+
+            lblFilterStatus.Text = "This Week";
+
+            LoadSummaryCards();
         }
     }
 }
