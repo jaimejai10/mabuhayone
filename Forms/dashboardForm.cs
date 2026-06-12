@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Windows.Forms.DataVisualization.Charting;
 using Mabuhayone.Database;
+using MySql.Data.MySqlClient;
 
 namespace Mabuhayone
 {
@@ -29,7 +30,8 @@ namespace Mabuhayone
 
             LoadSummaryCards();
             LoadUserPerformance();
-            //LoadPieChart();
+            LoadPieChart();
+            LoadTopRequestedService();
             //LoadWorkloadTrend();
             //LoadNotifications();
         }
@@ -41,12 +43,12 @@ namespace Mabuhayone
             }
             else if (this.Width < 1200)
             {
-                tableLayoutPanelAnalyticsRow.ColumnStyles[1].Width = tableLayoutPanelAnalyticsRow.Width - (chart1.Width + chart1.Margin.Right);
+                tableLayoutPanelAnalyticsRow.ColumnStyles[1].Width = tableLayoutPanelAnalyticsRow.Width - (chartSummaryReport.Width + chartSummaryReport.Margin.Right);
             }
             else
             {
                 tableLayoutPanelAnalyticsRow.ColumnStyles[1].Width = tableLayoutPanelAnalyticsRow.Width -
-                    (chart1.Width + chart2.Width + chart1.Margin.Right + chart2.Margin.Right);
+                    (chartSummaryReport.Width + chartTopServices.Width + chartSummaryReport.Margin.Right + chartTopServices.Margin.Right);
             }
             if (this.Height <= 800)
             {
@@ -156,6 +158,7 @@ namespace Mabuhayone
                 DashboardCache.LastUpdated = DateTime.Now;
 
                 ApplyCacheToUI();
+                LoadPieChart();
             }
             catch (Exception ex)
             {
@@ -215,6 +218,7 @@ namespace Mabuhayone
 
             LoadSummaryCards();
             LoadUserPerformance();
+            LoadTopRequestedService();
         }
 
         private void btnThisYear_Click(object sender, EventArgs e)
@@ -379,5 +383,110 @@ namespace Mabuhayone
         {
 
         }
+        private void LoadPieChart()
+        {
+            chartSummaryReport.Series.Clear();
+            chartSummaryReport.Titles.Clear();
+
+            chartSummaryReport.Titles.Add("Task Summary Overview");
+
+            Series series = new Series("Tasks");
+            series.ChartType = SeriesChartType.Pie;
+
+            int total = DashboardCache.TotalTasks;
+            int today = DashboardCache.TodayTasks;
+            int pending = DashboardCache.Pending;
+            int inProgress = DashboardCache.InProgress;
+            int overdue = DashboardCache.Overdue;
+
+            series.Points.AddXY("Total Tasks", total);
+            series.Points.AddXY("Today Tasks", today);
+            series.Points.AddXY("Pending", pending);
+            series.Points.AddXY("In Progress", inProgress);
+            series.Points.AddXY("Overdue", overdue);
+
+            // =========================
+            // REMOVE NUMBERS / LABELS
+            // =========================
+            series.IsValueShownAsLabel = false;
+            series.Label = "";
+
+            // COLORS (HEX STYLE)
+            series.Points[0].Color = ColorTranslator.FromHtml("#DA70D6");
+            series.Points[1].Color = ColorTranslator.FromHtml("#00CED1");
+            series.Points[2].Color = ColorTranslator.FromHtml("#FF4A82");
+            series.Points[3].Color = ColorTranslator.FromHtml("#6266F4");
+            series.Points[4].Color = ColorTranslator.FromHtml("#00BEFF");
+
+            chartSummaryReport.Series.Add(series);
+
+            chartSummaryReport.Legends[0].Enabled = true;
+
+            series["PieLabelStyle"] = "Disabled"; // extra safety
+        }
+
+        private void LoadTopRequestedService()
+        {
+            chartTopServices.Series.Clear();
+            chartTopServices.Titles.Clear();
+
+            chartTopServices.Titles.Add("Top 5 Requested Services");
+
+            Series series = new Series("Services");
+            series.ChartType = SeriesChartType.Bar;
+
+            DBConnection db = new DBConnection();
+            MySqlConnection conn = db.GetConnection();
+
+            conn.Open();
+
+            string query = @"
+                SELECT 
+                    t.category AS Service,
+                    COUNT(t.task_id) AS TotalRequests
+                FROM tasks t
+                WHERE 
+                    (@start IS NULL OR DATE(t.created_at) BETWEEN @start AND @end)
+                    AND t.category IS NOT NULL
+                    AND TRIM(t.category) <> ''
+                GROUP BY t.category
+                ORDER BY TotalRequests DESC
+                LIMIT 5;
+                ";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            cmd.Parameters.AddWithValue("@start", filterStartDate);
+            cmd.Parameters.AddWithValue("@end", filterEndDate);
+
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                series.Points.AddXY(
+                    reader["Service"].ToString(),
+                    Convert.ToInt32(reader["TotalRequests"])
+                );
+            }
+
+            reader.Close();
+            conn.Close();
+
+            // =========================
+            // SAFE CHECK (IMPORTANT)
+            // =========================
+            if (series.Points.Count == 0)
+            {
+                //MessageBox.Show("Start: " + filterStartDate.ToString("yyyy-MM-dd") + "\nEnd: " + filterEndDate.ToString("yyyy-MM-dd"));
+                return;
+            }
+
+            chartTopServices.Series.Add(series);
+
+            series.IsValueShownAsLabel = true;
+            chartTopServices.ChartAreas[0].AxisX.Interval = 1;
+        }
+
     }
 }

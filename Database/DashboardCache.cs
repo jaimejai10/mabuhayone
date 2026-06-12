@@ -14,6 +14,7 @@ namespace Mabuhayone.Database
         public static int InProgress { get; set; }
         public static int Overdue { get; set; }
 
+        public static int Complete { get; set; }
         public static DateTime LastUpdated { get; set; } = DateTime.MinValue;
     }
 }

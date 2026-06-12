@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             panelHeaderDate = new Panel();
             lblFilterStatus = new Label();
             btnYesterday = new Button();
@@ -55,8 +56,8 @@
             chart4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             tableLayoutPanelAnalyticsRow = new TableLayoutPanel();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            chartSummaryReport = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            chartTopServices = new System.Windows.Forms.DataVisualization.Charting.Chart();
             groupBox1 = new GroupBox();
             label3 = new Label();
             dgvUserPerformance = new DataGridView();
@@ -84,8 +85,8 @@
             ((System.ComponentModel.ISupportInitialize)chart4).BeginInit();
             tableLayoutPanelAnalyticsRow.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)chart2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)chartSummaryReport).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)chartTopServices).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUserPerformance).BeginInit();
             tableLayoutPanelSummaryCards.SuspendLayout();
@@ -257,17 +258,17 @@
             // 
             // chart4
             // 
-            chartArea1.Name = "ChartArea1";
-            chart4.ChartAreas.Add(chartArea1);
+            chartArea4.Name = "ChartArea1";
+            chart4.ChartAreas.Add(chartArea4);
             chart4.Dock = DockStyle.Fill;
-            legend1.Name = "Legend1";
-            chart4.Legends.Add(legend1);
+            legend4.Name = "Legend1";
+            chart4.Legends.Add(legend4);
             chart4.Location = new Point(10, 0);
             chart4.Name = "chart4";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            chart4.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            chart4.Series.Add(series4);
             chart4.Size = new Size(190, 364);
             chart4.TabIndex = 0;
             chart4.Text = "chart4";
@@ -291,8 +292,8 @@
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.AutoSize = true;
-            flowLayoutPanel1.Controls.Add(chart1);
-            flowLayoutPanel1.Controls.Add(chart2);
+            flowLayoutPanel1.Controls.Add(chartSummaryReport);
+            flowLayoutPanel1.Controls.Add(chartTopServices);
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Margin = new Padding(0);
@@ -300,39 +301,47 @@
             flowLayoutPanel1.Size = new Size(797, 261);
             flowLayoutPanel1.TabIndex = 0;
             // 
-            // chart1
+            // chartSummaryReport
             // 
-            chartArea2.Name = "ChartArea1";
-            chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            chart1.Legends.Add(legend2);
-            chart1.Location = new Point(0, 0);
-            chart1.Margin = new Padding(0, 0, 10, 10);
-            chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            chart1.Series.Add(series2);
-            chart1.Size = new Size(300, 250);
-            chart1.TabIndex = 0;
-            chart1.Text = "chart1";
+            chartArea5.Name = "ChartArea1";
+            chartSummaryReport.ChartAreas.Add(chartArea5);
+            legend5.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend5.IsDockedInsideChartArea = false;
+            legend5.Name = "Legend1";
+            chartSummaryReport.Legends.Add(legend5);
+            chartSummaryReport.Location = new Point(0, 0);
+            chartSummaryReport.Margin = new Padding(0, 0, 10, 10);
+            chartSummaryReport.Name = "chartSummaryReport";
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            chartSummaryReport.Series.Add(series5);
+            chartSummaryReport.Size = new Size(300, 250);
+            chartSummaryReport.TabIndex = 0;
+            chartSummaryReport.Text = "chart1";
+            title2.Name = "Title1";
+            title2.Text = "Summary Chart";
+            chartSummaryReport.Titles.Add(title2);
             // 
-            // chart2
+            // chartTopServices
             // 
-            chartArea3.Name = "ChartArea1";
-            chart2.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            chart2.Legends.Add(legend3);
-            chart2.Location = new Point(310, 0);
-            chart2.Margin = new Padding(0, 0, 10, 10);
-            chart2.Name = "chart2";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            chart2.Series.Add(series3);
-            chart2.Size = new Size(300, 250);
-            chart2.TabIndex = 1;
-            chart2.Text = "chart2";
+            chartArea6.Name = "ChartArea1";
+            chartTopServices.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            chartTopServices.Legends.Add(legend6);
+            chartTopServices.Location = new Point(310, 0);
+            chartTopServices.Margin = new Padding(0, 0, 10, 10);
+            chartTopServices.Name = "chartTopServices";
+            chartTopServices.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            chartTopServices.Series.Add(series6);
+            chartTopServices.Size = new Size(300, 250);
+            chartTopServices.TabIndex = 1;
+            chartTopServices.Text = "chart2";
             // 
             // groupBox1
             // 
@@ -593,8 +602,8 @@
             tableLayoutPanelAnalyticsRow.ResumeLayout(false);
             tableLayoutPanelAnalyticsRow.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)chart2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)chartSummaryReport).EndInit();
+            ((System.ComponentModel.ISupportInitialize)chartTopServices).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUserPerformance).EndInit();
@@ -623,8 +632,7 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart4;
         private TableLayoutPanel tableLayoutPanelAnalyticsRow;
         private FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartTopServices;
         private TableLayoutPanel tableLayoutPanelSummaryCards;
         private Panel panel5;
         private Label lblOverdueCount;
@@ -652,5 +660,6 @@
         private GroupBox groupBox1;
         private DataGridView dgvUserPerformance;
         private Label label3;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartSummaryReport;
     }
 }

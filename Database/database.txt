@@ -1,0 +1,67 @@
+CREATE TABLE `companies` (
+  `comp_id` int(11) NOT NULL,
+  `comp_name` varchar(50) DEFAULT NULL,
+  `mobile_no` varchar(20) DEFAULT NULL,
+  `messenger_link` varchar(255) DEFAULT NULL,
+  `comp_address` varchar(50) DEFAULT NULL,
+  `tin` varchar(255) DEFAULT NULL,
+  `business_type` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+
+
+CREATE TABLE `notifications` (
+  `notif_id` int(11) NOT NULL AUTO_INCREMENT,
+  `message` text NOT NULL,
+  `recipient` int(11) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp(),
+  `is_read` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`notif_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+
+
+CREATE TABLE `tasks` (
+  `task_id` int(11) NOT NULL AUTO_INCREMENT,
+  `report_id` varchar(50) DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `company_id` int(11) DEFAULT NULL,
+  `company_name` varchar(255) DEFAULT NULL,
+  `requested_by` varchar(50) DEFAULT NULL,
+  `requester_no` varchar(20) DEFAULT NULL,
+  `requester_ipadd` varchar(20) DEFAULT NULL,
+  `device_info` text DEFAULT NULL,
+  `assigned_id` int(11) DEFAULT NULL,
+  `assigned_to` int(11) DEFAULT NULL,
+  `due_date` date DEFAULT NULL,
+  `status` enum('pending','assigned','in_progress','on_hold','completed','cancelled') DEFAULT 'pending',
+  `dagnosis` text DEFAULT NULL,
+  `recommendation` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`task_id`),
+  KEY `assigned_to` (`assigned_to`),
+  CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`assigned_to`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `employee_id` varchar(20) DEFAULT NULL,
+  `full_name` varchar(50) NOT NULL,
+  `mobile_no` varchar(50) DEFAULT NULL,
+  `email` varchar(20) DEFAULT NULL,
+  `position` varchar(20) DEFAULT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('admin','employee') NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
