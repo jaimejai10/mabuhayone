@@ -32,8 +32,7 @@ namespace Mabuhayone
             LoadUserPerformance();
             LoadPieChart();
             LoadTopRequestedService();
-            //LoadWorkloadTrend();
-            //LoadNotifications();
+
         }
         private void ResponsiveEnd()
         {
@@ -218,7 +217,6 @@ namespace Mabuhayone
 
             LoadSummaryCards();
             LoadUserPerformance();
-            LoadTopRequestedService();
         }
 
         private void btnThisYear_Click(object sender, EventArgs e)
@@ -287,25 +285,20 @@ namespace Mabuhayone
                 string query = @"
                     SELECT 
                         u.full_name AS Employee,
-
                         COUNT(t.task_id) AS TotalTasks,
-
                         SUM(CASE WHEN t.status = 'completed' THEN 1 ELSE 0 END) AS Completed,
-
                         SUM(CASE WHEN t.status = 'in_progress' THEN 1 ELSE 0 END) AS InProgress,
-
                         SUM(CASE WHEN t.status = 'pending' THEN 1 ELSE 0 END) AS Pending,
-
                         ROUND(
                             (SUM(CASE WHEN t.status = 'completed' THEN 1 ELSE 0 END) / NULLIF(COUNT(t.task_id),0)) * 100,
                             0
                         ) AS CompletionRate
-
                     FROM tasks t
                     INNER JOIN users u ON u.user_id = t.assigned_to
                     WHERE (@start IS NULL OR t.created_at BETWEEN @start AND @end)
-                    GROUP BY u.user_id, u.full_name;
-                    ";
+                    GROUP BY u.user_id, u.full_name
+                    ORDER BY CompletionRate DESC;
+                ";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
 
@@ -324,50 +317,28 @@ namespace Mabuhayone
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
-                if (!dt.Columns.Contains("Status"))
-                {
-                    dt.Columns.Add("Status", typeof(string));
-                }
-
-                foreach (DataRow row in dt.Rows)
-                {
-                    double percent = row["CompletionRate"] == DBNull.Value
-                        ? 0
-                        : Convert.ToDouble(row["CompletionRate"]);
-
-                    if (percent >= 80)
-                        row["Status"] = "🟢 Good";
-                    else if (percent >= 50)
-                        row["Status"] = "🟡 Average";
-                    else
-                        row["Status"] = "🔴 Low";
-                }
-
-                dt.DefaultView.Sort = "CompletionRate DESC";
-                dt = dt.DefaultView.ToTable();
-
                 dgvUserPerformance.DataSource = dt;
 
-                foreach (DataGridViewRow row in dgvUserPerformance.Rows)
-                {
-                    if (row.IsNewRow) continue;
-
-                    double percent = Convert.ToDouble(row.Cells["CompletionRate"].Value);
-
-                    if (percent >= 80)
-                        row.DefaultCellStyle.BackColor = Color.LightGreen;
-                    else if (percent >= 50)
-                        row.DefaultCellStyle.BackColor = Color.Khaki;
-                    else
-                        row.DefaultCellStyle.BackColor = Color.LightCoral;
-                }
-
-                dgvUserPerformance.AllowUserToOrderColumns = false;
+                // IMPORTANT: ensure event is attached only once
+                dgvUserPerformance.CellPainting -= dgvUserPerformance_CellPainting;
+                dgvUserPerformance.CellPainting += dgvUserPerformance_CellPainting;
 
                 foreach (DataGridViewColumn col in dgvUserPerformance.Columns)
                 {
                     col.SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
+
+                dgvUserPerformance.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                dgvUserPerformance.Columns["Employee"].FillWeight = 200;
+                dgvUserPerformance.Columns["TotalTasks"].FillWeight = 80;
+                dgvUserPerformance.Columns["Completed"].FillWeight = 80;
+                dgvUserPerformance.Columns["InProgress"].FillWeight = 80;
+                dgvUserPerformance.Columns["Pending"].FillWeight = 80;
+                dgvUserPerformance.Columns["CompletionRate"].FillWeight = 120;
+
+                dgvUserPerformance.ClearSelection();
+                dgvUserPerformance.CurrentCell = null;
             }
             catch (Exception ex)
             {
@@ -433,60 +404,135 @@ namespace Mabuhayone
             chartTopServices.Titles.Add("Top 5 Requested Services");
 
             Series series = new Series("Services");
+
+            // ✔ Horizontal bar
             series.ChartType = SeriesChartType.Bar;
+
+            series.IsValueShownAsLabel = true;
+
+            // 🔥 IMPORTANT FIX FOR OVERLAP
+            series["PointWidth"] = "0.6";
 
             DBConnection db = new DBConnection();
             MySqlConnection conn = db.GetConnection();
 
-            conn.Open();
+            try
+            {
+                conn.Open();
 
-            string query = @"
+                string query = @"
                 SELECT 
-                    t.category AS Service,
-                    COUNT(t.task_id) AS TotalRequests
-                FROM tasks t
-                WHERE 
-                    (@start IS NULL OR DATE(t.created_at) BETWEEN @start AND @end)
-                    AND t.category IS NOT NULL
-                    AND TRIM(t.category) <> ''
-                GROUP BY t.category
-                ORDER BY TotalRequests DESC
-                LIMIT 5;
-                ";
+                    TRIM(category) AS Service,
+                    COUNT(task_id) AS TotalRequests
+                FROM tasks
+                WHERE category IS NOT NULL AND TRIM(category) <> ''
+                GROUP BY TRIM(category)
+                ORDER BY TotalRequests DESC;
+                        ";
 
-            MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader reader = cmd.ExecuteReader();
 
-            cmd.Parameters.AddWithValue("@start", filterStartDate);
-            cmd.Parameters.AddWithValue("@end", filterEndDate);
+                while (reader.Read())
+                {
+                    string service = reader["Service"]?.ToString().Trim();
+                    int total = Convert.ToInt32(reader["TotalRequests"]);
 
+                    series.Points.AddXY(service, total);
+                }
 
-            MySqlDataReader reader = cmd.ExecuteReader();
+                reader.Close();
 
-            while (reader.Read())
-            {
-                series.Points.AddXY(
-                    reader["Service"].ToString(),
-                    Convert.ToInt32(reader["TotalRequests"])
-                );
+                chartTopServices.Series.Add(series);
+
+                // ✔ FIX AXIS DISPLAY
+                chartTopServices.ChartAreas[0].AxisY.Interval = 1;
+                chartTopServices.ChartAreas[0].AxisX.IsMarginVisible = true;
+
+                chartTopServices.ChartAreas[0].RecalculateAxesScale();
             }
-
-            reader.Close();
-            conn.Close();
-
-            // =========================
-            // SAFE CHECK (IMPORTANT)
-            // =========================
-            if (series.Points.Count == 0)
+            catch (Exception ex)
             {
-                //MessageBox.Show("Start: " + filterStartDate.ToString("yyyy-MM-dd") + "\nEnd: " + filterEndDate.ToString("yyyy-MM-dd"));
-                return;
+                MessageBox.Show(ex.Message);
             }
-
-            chartTopServices.Series.Add(series);
-
-            series.IsValueShownAsLabel = true;
-            chartTopServices.ChartAreas[0].AxisX.Interval = 1;
+            finally
+            {
+                conn.Close();
+            }
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvUserPerformance_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            if (dgvUserPerformance.Columns[e.ColumnIndex].Name == "CompletionRate")
+            {
+                e.PaintBackground(e.CellBounds, true);
+
+                int value = 0;
+                int.TryParse(
+                    dgvUserPerformance.Rows[e.RowIndex]
+                    .Cells["CompletionRate"].Value?.ToString(),
+                    out value
+                );
+
+                value = Math.Max(0, Math.Min(100, value));
+
+                // background bar
+                Rectangle barBack = new Rectangle(
+                    e.CellBounds.X + 5,
+                    e.CellBounds.Y + 8,
+                    e.CellBounds.Width - 10,
+                    12
+                );
+
+                using (Brush bg = new SolidBrush(Color.LightGray))
+                {
+                    e.Graphics.FillRectangle(bg, barBack);
+                }
+
+                // fill bar
+                Rectangle barFill = new Rectangle(
+                    e.CellBounds.X + 5,
+                    e.CellBounds.Y + 8,
+                    (int)((barBack.Width) * (value / 100f)),
+                    12
+                );
+
+                Color color =
+                    value >= 80 ? Color.SeaGreen :
+                    value >= 50 ? Color.Orange :
+                                  Color.IndianRed;
+
+                using (Brush br = new SolidBrush(color))
+                {
+                    e.Graphics.FillRectangle(br, barFill);
+                }
+
+
+
+                // text %
+
+                using (Font font = new Font("Segoe UI", 8, FontStyle.Regular))
+                {
+                    TextRenderer.DrawText(
+                        e.Graphics,
+                        value + "%",
+                        font,
+                        e.CellBounds,
+                        Color.Black,
+                        TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
+                    );
+                }
+
+                e.Handled = true;
+            }
+        }
     }
 }
