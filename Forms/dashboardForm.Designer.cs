@@ -54,7 +54,7 @@
             panelDataGrid = new Panel();
             label2 = new Label();
             label1 = new Label();
-            dataGridView1 = new DataGridView();
+            dgvTasks = new DataGridView();
             panelRecentActivity = new Panel();
             chart4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             tableLayoutPanelAnalyticsRow = new TableLayoutPanel();
@@ -88,7 +88,7 @@
             panelHeaderDate.SuspendLayout();
             panelContainer.SuspendLayout();
             panelDataGrid.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvTasks).BeginInit();
             panelRecentActivity.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart4).BeginInit();
             tableLayoutPanelAnalyticsRow.SuspendLayout();
@@ -255,9 +255,9 @@
             panelDataGrid.BackColor = Color.White;
             panelDataGrid.Controls.Add(label2);
             panelDataGrid.Controls.Add(label1);
-            panelDataGrid.Controls.Add(dataGridView1);
+            panelDataGrid.Controls.Add(dgvTasks);
             panelDataGrid.Dock = DockStyle.Top;
-            panelDataGrid.Location = new Point(10, 361);
+            panelDataGrid.Location = new Point(10, 406);
             panelDataGrid.Margin = new Padding(0);
             panelDataGrid.Name = "panelDataGrid";
             panelDataGrid.Size = new Size(947, 374);
@@ -281,21 +281,21 @@
             label1.TabIndex = 1;
             label1.Text = "label1";
             // 
-            // dataGridView1
+            // dgvTasks
             // 
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(6, 38);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(935, 333);
-            dataGridView1.TabIndex = 0;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dgvTasks.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvTasks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvTasks.Location = new Point(6, 38);
+            dgvTasks.Name = "dgvTasks";
+            dgvTasks.Size = new Size(935, 333);
+            dgvTasks.TabIndex = 0;
+            dgvTasks.CellContentClick += dataGridView1_CellContentClick;
             // 
             // panelRecentActivity
             // 
             panelRecentActivity.Controls.Add(chart4);
             panelRecentActivity.Dock = DockStyle.Right;
-            panelRecentActivity.Location = new Point(957, 361);
+            panelRecentActivity.Location = new Point(957, 406);
             panelRecentActivity.Name = "panelRecentActivity";
             panelRecentActivity.Padding = new Padding(10, 0, 0, 0);
             panelRecentActivity.Size = new Size(200, 364);
@@ -331,7 +331,7 @@
             tableLayoutPanelAnalyticsRow.Name = "tableLayoutPanelAnalyticsRow";
             tableLayoutPanelAnalyticsRow.RowCount = 1;
             tableLayoutPanelAnalyticsRow.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanelAnalyticsRow.Size = new Size(1147, 261);
+            tableLayoutPanelAnalyticsRow.Size = new Size(1147, 306);
             tableLayoutPanelAnalyticsRow.TabIndex = 8;
             // 
             // flowLayoutPanel1
@@ -343,7 +343,7 @@
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Margin = new Padding(0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(797, 261);
+            flowLayoutPanel1.Size = new Size(797, 306);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // chartSummaryReport
@@ -362,7 +362,7 @@
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             chartSummaryReport.Series.Add(series2);
-            chartSummaryReport.Size = new Size(300, 250);
+            chartSummaryReport.Size = new Size(300, 296);
             chartSummaryReport.TabIndex = 0;
             chartSummaryReport.Text = "chart1";
             title1.Name = "Title1";
@@ -378,15 +378,15 @@
             chartTopServices.Location = new Point(310, 0);
             chartTopServices.Margin = new Padding(0, 0, 10, 10);
             chartTopServices.Name = "chartTopServices";
-            chartTopServices.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
+            chartTopServices.Padding = new Padding(10, 0, 0, 0);
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
             series3.Legend = "Legend1";
             series3.Name = "Series1";
             chartTopServices.Series.Add(series3);
-            chartTopServices.Size = new Size(300, 250);
+            chartTopServices.Size = new Size(453, 296);
             chartTopServices.TabIndex = 1;
-            chartTopServices.Text = "chart2";
+            chartTopServices.Text = "chart1";
             // 
             // groupBox1
             // 
@@ -396,7 +396,7 @@
             groupBox1.Location = new Point(797, 0);
             groupBox1.Margin = new Padding(0, 0, 0, 10);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(350, 251);
+            groupBox1.Size = new Size(350, 296);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "User Performance";
@@ -418,8 +418,10 @@
             dgvUserPerformance.AllowUserToResizeRows = false;
             dgvUserPerformance.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dgvUserPerformance.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvUserPerformance.BackgroundColor = Color.White;
             dgvUserPerformance.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvUserPerformance.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Segoe MDL2 Assets", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowFrame;
@@ -715,7 +717,7 @@
             panelContainer.PerformLayout();
             panelDataGrid.ResumeLayout(false);
             panelDataGrid.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvTasks).EndInit();
             panelRecentActivity.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)chart4).EndInit();
             tableLayoutPanelAnalyticsRow.ResumeLayout(false);
@@ -751,12 +753,11 @@
         private Panel panelDataGrid;
         private Label label2;
         private Label label1;
-        private DataGridView dataGridView1;
+        private DataGridView dgvTasks;
         private Panel panelRecentActivity;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart4;
         private TableLayoutPanel tableLayoutPanelAnalyticsRow;
         private FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartTopServices;
         private TableLayoutPanel tableLayoutPanelSummaryCards;
         private Panel panel5;
         private Label lblOverdueCount;
@@ -790,5 +791,6 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox2;
         private DateTimePicker dtpStartDate;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartTopServices;
     }
 }

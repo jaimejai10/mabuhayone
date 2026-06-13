@@ -32,6 +32,7 @@ namespace Mabuhayone
             LoadUserPerformance();
             LoadPieChart();
             LoadTopRequestedService();
+            LoadTasks();
 
         }
         private void ResponsiveEnd()
@@ -398,21 +399,6 @@ namespace Mabuhayone
 
         private void LoadTopRequestedService()
         {
-            chartTopServices.Series.Clear();
-            chartTopServices.Titles.Clear();
-
-            chartTopServices.Titles.Add("Top 5 Requested Services");
-
-            Series series = new Series("Services");
-
-            // ✔ Horizontal bar
-            series.ChartType = SeriesChartType.Bar;
-
-            series.IsValueShownAsLabel = true;
-
-            // 🔥 IMPORTANT FIX FOR OVERLAP
-            series["PointWidth"] = "0.6";
-
             DBConnection db = new DBConnection();
             MySqlConnection conn = db.GetConnection();
 
@@ -421,39 +407,61 @@ namespace Mabuhayone
                 conn.Open();
 
                 string query = @"
-                SELECT 
-                    TRIM(category) AS Service,
-                    COUNT(task_id) AS TotalRequests
-                FROM tasks
-                WHERE category IS NOT NULL AND TRIM(category) <> ''
-                GROUP BY TRIM(category)
-                ORDER BY TotalRequests DESC;
-                        ";
+            SELECT 
+                UPPER(TRIM(category)) AS Service,
+                COUNT(task_id) AS TotalRequests
+            FROM tasks
+            WHERE category IS NOT NULL 
+              AND TRIM(category) <> ''
+              AND UPPER(TRIM(category)) <> 'OTHERS'
+            GROUP BY UPPER(TRIM(category))
+            ORDER BY TotalRequests DESC
+            LIMIT 5;
+        ";
 
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataReader reader = cmd.ExecuteReader();
+                MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
 
-                while (reader.Read())
-                {
-                    string service = reader["Service"]?.ToString().Trim();
-                    int total = Convert.ToInt32(reader["TotalRequests"]);
+                chartTopServices.Series.Clear();
+                chartTopServices.ChartAreas.Clear();
+                chartTopServices.Titles.Clear();
 
-                    series.Points.AddXY(service, total);
-                }
+                // Title (kept clean)
+                chartTopServices.Titles.Add("Top Requested Services");
+                chartTopServices.Titles[0].Font = new Font("Segoe UI", 9, FontStyle.Bold);
+                chartTopServices.Titles[0].Alignment = ContentAlignment.TopCenter;
 
-                reader.Close();
+                ChartArea area = new ChartArea();
+                chartTopServices.ChartAreas.Add(area);
+
+                area.AxisX.Interval = 1;
+                area.AxisX.MajorGrid.Enabled = false;
+                area.AxisY.MajorGrid.Enabled = false;
+
+                area.AxisX.IsMarginVisible = true;
+
+                Series series = new Series();
+                series.ChartType = SeriesChartType.Bar;
+                series.IsValueShownAsLabel = true;
+                series.IsXValueIndexed = true;
+
+                series.LabelForeColor = Color.Black;
+                series.Font = new Font("Segoe UI", 9);
 
                 chartTopServices.Series.Add(series);
 
-                // ✔ FIX AXIS DISPLAY
-                chartTopServices.ChartAreas[0].AxisY.Interval = 1;
-                chartTopServices.ChartAreas[0].AxisX.IsMarginVisible = true;
-
-                chartTopServices.ChartAreas[0].RecalculateAxesScale();
+                foreach (DataRow row in dt.Rows)
+                {
+                    series.Points.AddXY(
+                        row["Service"].ToString(),
+                        Convert.ToInt32(row["TotalRequests"])
+                    );
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Chart Error: " + ex.Message);
             }
             finally
             {
@@ -532,6 +540,71 @@ namespace Mabuhayone
                 }
 
                 e.Handled = true;
+            }
+        }
+        private void LoadTasks()
+        {
+            DBConnection db = new DBConnection();
+            MySqlConnection conn = db.GetConnection();
+
+            try
+            {
+                conn.Open();
+
+                string query = @"
+            SELECT 
+                t.report_id AS TaskID,
+                t.title AS Title,
+                u.full_name AS AssignedTo,
+                t.status AS Status,
+                t.company_name AS CompanyName
+            FROM tasks t
+            INNER JOIN users u ON u.user_id = t.assigned_id
+            ORDER BY t.report_id DESC;
+        ";
+
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvTasks.DataSource = dt;
+
+                // disable sorting
+                foreach (DataGridViewColumn col in dgvTasks.Columns)
+                {
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+
+                // auto size columns
+                dgvTasks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                // column sizing
+                if (dgvTasks.Columns["TaskID"] != null)
+                    dgvTasks.Columns["TaskID"].FillWeight = 70;
+
+                if (dgvTasks.Columns["Title"] != null)
+                    dgvTasks.Columns["Title"].FillWeight = 200;
+
+                if (dgvTasks.Columns["AssignedTo"] != null)
+                    dgvTasks.Columns["AssignedTo"].FillWeight = 150;
+
+                if (dgvTasks.Columns["Status"] != null)
+                    dgvTasks.Columns["Status"].FillWeight = 100;
+
+                if (dgvTasks.Columns["CompanyName"] != null)
+                    dgvTasks.Columns["CompanyName"].FillWeight = 150;
+
+                dgvTasks.ClearSelection();
+                dgvTasks.CurrentCell = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Task Load Error: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
             }
         }
     }
