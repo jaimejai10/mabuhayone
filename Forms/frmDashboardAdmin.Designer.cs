@@ -1,6 +1,6 @@
 ﻿namespace Mabuhayone
 {
-    partial class dashboardForm
+    partial class frmDashboardAdmin
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(dashboardForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDashboardAdmin));
             panelHeaderDate = new Panel();
             lblFilterStatus = new Label();
             btnYesterday = new Button();
@@ -137,6 +137,7 @@
             lblFilterStatus.TabIndex = 7;
             lblFilterStatus.Text = "Filter Status";
             lblFilterStatus.TextAlign = ContentAlignment.MiddleRight;
+            lblFilterStatus.Click += lblFilterStatus_Click;
             // 
             // btnYesterday
             // 
@@ -698,16 +699,18 @@
             lblTodayTaskCount.TabIndex = 1;
             lblTodayTaskCount.Text = "00";
             lblTodayTaskCount.TextAlign = ContentAlignment.MiddleRight;
+            lblTodayTaskCount.Click += lblTodayTaskCount_Click;
             // 
-            // dashboardForm
+            // frmDashboardAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1184, 761);
             Controls.Add(panelContainer);
             Controls.Add(panelHeaderDate);
+            FormBorderStyle = FormBorderStyle.None;
             MinimumSize = new Size(450, 650);
-            Name = "dashboardForm";
+            Name = "frmDashboardAdmin";
             Text = "DASHBOARD";
             Load += dashboardForm_Load;
             ResizeEnd += dashboardForm_ResizeEnd;

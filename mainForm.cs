@@ -70,7 +70,7 @@ namespace Mabuhayone
 
         private void CollapseMenu()
         {
-            if (this.panelMenu.Width > 200)
+            if (this.panelMenu.Width > 189)
             {
                 panelMenu.Width = 100;
                 pictureBox1.Visible = false;
@@ -79,19 +79,17 @@ namespace Mabuhayone
                 {
                     menuButton.Text = "";
                     menuButton.ImageAlign = ContentAlignment.MiddleCenter;
-                    menuButton.Padding = new Padding(0);
                 }
             }
             else
             {
-                panelMenu.Width = 230;
+                panelMenu.Width = 190;
                 pictureBox1.Visible = true;
                 btnMenu.Dock = DockStyle.None;
                 foreach (Button menuButton in panelMenu.Controls.OfType<Button>())
                 {
                     menuButton.Text = " " + (menuButton.Tag?.ToString() ?? "");
                     menuButton.ImageAlign = ContentAlignment.MiddleLeft;
-                    menuButton.Padding = new Padding(10, 0, 0, 0);
                 }
             }
         }
@@ -124,6 +122,35 @@ namespace Mabuhayone
             lblFullname.Text = "Hi, " + UserSession.FullName;
             lblPosition.Text = UserSession.Position;
 
+            OrganizeMenu();
+
+            if (UserSession.Role == "admin")
+            {
+                OpenChildForm(new frmDashboardAdmin());
+                ActivateButton(btnDashboard, RGBColors.color1);
+                btnApplyLeave.Visible = false;
+            }
+            else if (UserSession.Role == "employee")
+            {
+                OpenChildForm(new frmDashboardUser());
+                ActivateButton(btnDashboard, RGBColors.color1);
+                btnManageCompanies.Visible = false;
+                btnManageUsers.Visible = false;
+            }
+
+        }
+
+        private void OrganizeMenu()
+        {
+            // smaller index = higher position (TOP)
+
+            panelMenu.Controls.SetChildIndex(btnDashboard, 6);
+            panelMenu.Controls.SetChildIndex(btnManageUsers, 5);
+            panelMenu.Controls.SetChildIndex(btnManageCompanies, 4);
+            panelMenu.Controls.SetChildIndex(btnTask, 3);
+            panelMenu.Controls.SetChildIndex(btnApplyLeave, 2);
+            panelMenu.Controls.SetChildIndex(btnSettings, 1);
+            panelMenu.Controls.SetChildIndex(btnProfile, 0);
         }
 
 
@@ -134,13 +161,16 @@ namespace Mabuhayone
         private void btnDashboard_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color1);//nav color highlight
-            OpenChildForm(new dashboardForm());
+            if (UserSession.Role == "admin")
+                OpenChildForm(new frmDashboardAdmin());
+            else if (UserSession.Role == "employee")
+                OpenChildForm(new frmDashboardUser());
         }
 
         private void btnTask_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color2);//nav color highlight
-            //OpenChildForm(new taskForm());
+            OpenChildForm(new taskForm());
         }
 
         private void btnProfile_Click(object sender, EventArgs e)
@@ -180,7 +210,7 @@ namespace Mabuhayone
                 leftBorderBtn.BringToFront();
                 //Current Child Form Icon
                 iconCurrentChildForm.IconChar = currentBtn.IconChar;
-                iconCurrentChildForm.IconColor = color;
+                //iconCurrentChildForm.IconColor = color;
             }
         }
         private void DisableButton()
@@ -192,7 +222,7 @@ namespace Mabuhayone
                 currentBtn.TextAlign = ContentAlignment.MiddleLeft;
                 currentBtn.IconColor = Color.White;
                 currentBtn.TextImageRelation = TextImageRelation.ImageBeforeText;
-                currentBtn.ImageAlign = ContentAlignment.MiddleLeft;
+                currentBtn.ImageAlign = ContentAlignment.MiddleCenter;
             }
         }//Navigation Design end
 
@@ -205,8 +235,8 @@ namespace Mabuhayone
                 currentChildForm.Close();
             }
             currentChildForm = childForm;
-        //End
-        childForm.TopLevel = false;
+            //End
+            childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
             panelDesktop.Controls.Add(childForm);
@@ -214,15 +244,31 @@ namespace Mabuhayone
             childForm.BringToFront();
             childForm.Show();
             lblTitleChildForm.Text = childForm.Text;
+
         }
 
-        private void Reset()
+        private void lblTitleChildForm_Click(object sender, EventArgs e)
         {
-            DisableButton();
-            leftBorderBtn.Visible = false;
-            iconCurrentChildForm.IconChar = IconChar.Home;
-            iconCurrentChildForm.IconColor = Color.MediumBlue;
-            lblTitleChildForm.Text = "Home";
+
+        }
+
+        private void btnManageCompanies_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnManageUsers_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelTitleBar_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

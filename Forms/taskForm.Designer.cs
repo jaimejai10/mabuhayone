@@ -36,7 +36,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1075, 614);
             Name = "taskForm";
-            Text = "taskForm";
+            Text = "ALL TASKS";
             ResumeLayout(false);
         }
 

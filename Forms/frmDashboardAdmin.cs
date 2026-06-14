@@ -13,13 +13,13 @@ using MySql.Data.MySqlClient;
 
 namespace Mabuhayone
 {
-    public partial class dashboardForm : Form
+    public partial class frmDashboardAdmin : Form
     {
         private bool isFilterActive = false;
         private DateTime filterStartDate;
         private DateTime filterEndDate;
 
-        public dashboardForm()
+        public frmDashboardAdmin()
         {
             InitializeComponent();
         }
@@ -295,7 +295,7 @@ namespace Mabuhayone
                             0
                         ) AS CompletionRate
                     FROM tasks t
-                    INNER JOIN users u ON u.user_id = t.assigned_to
+                    LEFT JOIN users u ON u.user_id = t.assigned_to
                     WHERE (@start IS NULL OR t.created_at BETWEEN @start AND @end)
                     GROUP BY u.user_id, u.full_name
                     ORDER BY CompletionRate DESC;
@@ -552,15 +552,18 @@ namespace Mabuhayone
                 conn.Open();
 
                 string query = @"
-            SELECT 
-                t.report_id AS TaskID,
-                t.title AS Title,
-                u.full_name AS AssignedTo,
-                t.status AS Status,
-                t.company_name AS CompanyName
-            FROM tasks t
-            INNER JOIN users u ON u.user_id = t.assigned_id
-            ORDER BY t.report_id DESC;
+                SELECT 
+                    t.report_id AS TaskID,
+                    t.title AS Title,
+                    u.full_name AS AssignedTo,
+                    t.status AS Status,
+                    c.comp_name AS CompanyName
+                FROM tasks t
+                LEFT JOIN users u
+                    ON u.user_id = t.assigned_id
+                LEFT JOIN companies c
+                    ON c.comp_id = t.company_id
+                ORDER BY t.report_id DESC;
         ";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -606,6 +609,16 @@ namespace Mabuhayone
             {
                 conn.Close();
             }
+        }
+
+        private void lblTodayTaskCount_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblFilterStatus_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

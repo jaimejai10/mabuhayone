@@ -111,7 +111,6 @@ C:\Users\Mahel Luis\Documents\mabuhayone\bin\Debug\net8.0-windows\runtimes\win-x
 C:\Users\Mahel Luis\Documents\mabuhayone\bin\Debug\net8.0-windows\runtimes\win-x64\native\krb5_64.dll
 C:\Users\Mahel Luis\Documents\mabuhayone\bin\Debug\net8.0-windows\runtimes\win-x64\native\krbcc64.dll
 C:\Users\Mahel Luis\Documents\mabuhayone\obj\Debug\net8.0-windows\Mabuhayone.csproj.AssemblyReference.cache
-C:\Users\Mahel Luis\Documents\mabuhayone\obj\Debug\net8.0-windows\Mabuhayone.dashboardForm.resources
 C:\Users\Mahel Luis\Documents\mabuhayone\obj\Debug\net8.0-windows\Mabuhayone.Forms.taskForm.resources
 C:\Users\Mahel Luis\Documents\mabuhayone\obj\Debug\net8.0-windows\Mabuhayone.loginForm.resources
 C:\Users\Mahel Luis\Documents\mabuhayone\obj\Debug\net8.0-windows\Mabuhayone.mainForm.resources
@@ -130,3 +129,5 @@ C:\Users\Mahel Luis\Documents\mabuhayone\obj\Debug\net8.0-windows\Mabuhayone.gen
 C:\Users\Mahel Luis\Documents\mabuhayone\obj\Debug\net8.0-windows\ref\Mabuhayone.dll
 C:\Users\Mahel Luis\Documents\mabuhayone\bin\Debug\net8.0-windows\WinForms.DataVisualization.Utilities.dll
 C:\Users\Mahel Luis\Documents\mabuhayone\bin\Debug\net8.0-windows\WinForms.DataVisualization.dll
+C:\Users\Mahel Luis\Documents\mabuhayone\obj\Debug\net8.0-windows\Mabuhayone.frmDashboardAdmin.resources
+C:\Users\Mahel Luis\Documents\mabuhayone\obj\Debug\net8.0-windows\Mabuhayone.Forms.frmDashboardUser.resources
