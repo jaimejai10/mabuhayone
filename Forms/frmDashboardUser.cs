@@ -54,7 +54,7 @@ namespace Mabuhayone.Forms
             (SELECT COUNT(*) 
              FROM tasks 
              WHERE assigned_to = @userId 
-             AND status = 'in_progress') AS in_progress_tasks,
+             AND status = 'completed') AS completed_tasks,
 
             (SELECT COUNT(*) 
              FROM tasks 
@@ -77,7 +77,7 @@ namespace Mabuhayone.Forms
                     {
                         lblTotalTaskCount.Text = reader["total_tasks"].ToString();
                         lblPendingCount.Text = reader["pending_tasks"].ToString();
-                        lblInProgressCount.Text = reader["in_progress_tasks"].ToString();
+                        lblCompleted.Text = reader["completed_tasks"].ToString();
                         lblOverdueCount.Text = reader["overdue_tasks"].ToString();
                         lblTodayTaskCount.Text = reader["today_tasks"].ToString();
                     }

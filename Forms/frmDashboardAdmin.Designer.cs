@@ -28,18 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDashboardAdmin));
             panelHeaderDate = new Panel();
             lblFilterStatus = new Label();
@@ -56,7 +53,7 @@
             label1 = new Label();
             dgvTasks = new DataGridView();
             panelRecentActivity = new Panel();
-            chart4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            groupBox2 = new GroupBox();
             tableLayoutPanelAnalyticsRow = new TableLayoutPanel();
             flowLayoutPanel1 = new FlowLayoutPanel();
             chartSummaryReport = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -65,18 +62,14 @@
             label3 = new Label();
             dgvUserPerformance = new DataGridView();
             tableLayoutPanelSummaryCards = new TableLayoutPanel();
+            panel4 = new Panel();
+            pictureBox4 = new PictureBox();
+            lblCompletedCount = new Label();
+            lblCompleted = new Label();
             panel5 = new Panel();
             pictureBox5 = new PictureBox();
             lblOverdueCount = new Label();
             lblOverdue = new Label();
-            panel4 = new Panel();
-            pictureBox4 = new PictureBox();
-            lblInProgressCount = new Label();
-            lblInProgress = new Label();
-            panel3 = new Panel();
-            pictureBox3 = new PictureBox();
-            lblPendingCount = new Label();
-            lblPending = new Label();
             panel2 = new Panel();
             pictureBox2 = new PictureBox();
             lblTotalTaskCount = new Label();
@@ -85,12 +78,15 @@
             pictureBox1 = new PictureBox();
             lblTodayTask = new Label();
             lblTodayTaskCount = new Label();
+            panel6 = new Panel();
+            pictureBox6 = new PictureBox();
+            lblPendingCount = new Label();
+            label5 = new Label();
             panelHeaderDate.SuspendLayout();
             panelContainer.SuspendLayout();
             panelDataGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTasks).BeginInit();
             panelRecentActivity.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)chart4).BeginInit();
             tableLayoutPanelAnalyticsRow.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chartSummaryReport).BeginInit();
@@ -98,16 +94,16 @@
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUserPerformance).BeginInit();
             tableLayoutPanelSummaryCards.SuspendLayout();
-            panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
-            panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             SuspendLayout();
             // 
             // panelHeaderDate
@@ -294,7 +290,7 @@
             // 
             // panelRecentActivity
             // 
-            panelRecentActivity.Controls.Add(chart4);
+            panelRecentActivity.Controls.Add(groupBox2);
             panelRecentActivity.Dock = DockStyle.Right;
             panelRecentActivity.Location = new Point(957, 406);
             panelRecentActivity.Name = "panelRecentActivity";
@@ -302,22 +298,15 @@
             panelRecentActivity.Size = new Size(200, 364);
             panelRecentActivity.TabIndex = 9;
             // 
-            // chart4
+            // groupBox2
             // 
-            chartArea1.Name = "ChartArea1";
-            chart4.ChartAreas.Add(chartArea1);
-            chart4.Dock = DockStyle.Fill;
-            legend1.Name = "Legend1";
-            chart4.Legends.Add(legend1);
-            chart4.Location = new Point(10, 0);
-            chart4.Name = "chart4";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            chart4.Series.Add(series1);
-            chart4.Size = new Size(190, 364);
-            chart4.TabIndex = 0;
-            chart4.Text = "chart4";
+            groupBox2.Dock = DockStyle.Fill;
+            groupBox2.Location = new Point(10, 0);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(190, 364);
+            groupBox2.TabIndex = 0;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Recent Activity";
             // 
             // tableLayoutPanelAnalyticsRow
             // 
@@ -349,42 +338,42 @@
             // 
             // chartSummaryReport
             // 
-            chartArea2.Name = "ChartArea1";
-            chartSummaryReport.ChartAreas.Add(chartArea2);
-            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend2.IsDockedInsideChartArea = false;
-            legend2.Name = "Legend1";
-            chartSummaryReport.Legends.Add(legend2);
+            chartArea3.Name = "ChartArea1";
+            chartSummaryReport.ChartAreas.Add(chartArea3);
+            legend3.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend3.IsDockedInsideChartArea = false;
+            legend3.Name = "Legend1";
+            chartSummaryReport.Legends.Add(legend3);
             chartSummaryReport.Location = new Point(0, 0);
             chartSummaryReport.Margin = new Padding(0, 0, 10, 10);
             chartSummaryReport.Name = "chartSummaryReport";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            chartSummaryReport.Series.Add(series2);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            chartSummaryReport.Series.Add(series3);
             chartSummaryReport.Size = new Size(300, 296);
             chartSummaryReport.TabIndex = 0;
             chartSummaryReport.Text = "chart1";
-            title1.Name = "Title1";
-            title1.Text = "Summary Chart";
-            chartSummaryReport.Titles.Add(title1);
+            title2.Name = "Title1";
+            title2.Text = "Summary Chart";
+            chartSummaryReport.Titles.Add(title2);
             // 
             // chartTopServices
             // 
-            chartArea3.Name = "ChartArea1";
-            chartTopServices.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            chartTopServices.Legends.Add(legend3);
+            chartArea4.Name = "ChartArea1";
+            chartTopServices.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            chartTopServices.Legends.Add(legend4);
             chartTopServices.Location = new Point(310, 0);
             chartTopServices.Margin = new Padding(0, 0, 10, 10);
             chartTopServices.Name = "chartTopServices";
             chartTopServices.Padding = new Padding(10, 0, 0, 0);
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            chartTopServices.Series.Add(series3);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            chartTopServices.Series.Add(series4);
             chartTopServices.Size = new Size(453, 296);
             chartTopServices.TabIndex = 1;
             chartTopServices.Text = "chart1";
@@ -422,23 +411,23 @@
             dgvUserPerformance.BackgroundColor = Color.White;
             dgvUserPerformance.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvUserPerformance.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe MDL2 Assets", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowFrame;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvUserPerformance.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe MDL2 Assets", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowFrame;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvUserPerformance.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvUserPerformance.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.ButtonShadow;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgvUserPerformance.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.ButtonShadow;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dgvUserPerformance.DefaultCellStyle = dataGridViewCellStyle4;
             dgvUserPerformance.GridColor = Color.FromArgb(98, 102, 244);
             dgvUserPerformance.Location = new Point(6, 22);
             dgvUserPerformance.Name = "dgvUserPerformance";
@@ -457,9 +446,9 @@
             tableLayoutPanelSummaryCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
             tableLayoutPanelSummaryCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
             tableLayoutPanelSummaryCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tableLayoutPanelSummaryCards.Controls.Add(panel6, 3, 0);
+            tableLayoutPanelSummaryCards.Controls.Add(panel4, 2, 0);
             tableLayoutPanelSummaryCards.Controls.Add(panel5, 4, 0);
-            tableLayoutPanelSummaryCards.Controls.Add(panel4, 3, 0);
-            tableLayoutPanelSummaryCards.Controls.Add(panel3, 2, 0);
             tableLayoutPanelSummaryCards.Controls.Add(panel2, 1, 0);
             tableLayoutPanelSummaryCards.Controls.Add(panel1, 0, 0);
             tableLayoutPanelSummaryCards.Dock = DockStyle.Top;
@@ -469,6 +458,52 @@
             tableLayoutPanelSummaryCards.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanelSummaryCards.Size = new Size(1147, 90);
             tableLayoutPanelSummaryCards.TabIndex = 7;
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.FromArgb(98, 102, 244);
+            panel4.Controls.Add(pictureBox4);
+            panel4.Controls.Add(lblCompletedCount);
+            panel4.Controls.Add(lblCompleted);
+            panel4.Dock = DockStyle.Fill;
+            panel4.Location = new Point(458, 0);
+            panel4.Margin = new Padding(0, 0, 10, 10);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(219, 80);
+            panel4.TabIndex = 5;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
+            pictureBox4.Location = new Point(6, 5);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(70, 70);
+            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox4.TabIndex = 3;
+            pictureBox4.TabStop = false;
+            // 
+            // lblCompletedCount
+            // 
+            lblCompletedCount.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblCompletedCount.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCompletedCount.ForeColor = Color.White;
+            lblCompletedCount.Location = new Point(85, 47);
+            lblCompletedCount.Name = "lblCompletedCount";
+            lblCompletedCount.Size = new Size(134, 25);
+            lblCompletedCount.TabIndex = 1;
+            lblCompletedCount.Text = "00";
+            lblCompletedCount.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lblCompleted
+            // 
+            lblCompleted.AutoSize = true;
+            lblCompleted.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCompleted.ForeColor = Color.White;
+            lblCompleted.Location = new Point(74, 4);
+            lblCompleted.Name = "lblCompleted";
+            lblCompleted.Size = new Size(125, 20);
+            lblCompleted.TabIndex = 0;
+            lblCompleted.Text = "Total Completed";
             // 
             // panel5
             // 
@@ -515,98 +550,6 @@
             lblOverdue.Size = new Size(108, 20);
             lblOverdue.TabIndex = 0;
             lblOverdue.Text = "Total Overdue";
-            // 
-            // panel4
-            // 
-            panel4.BackColor = Color.FromArgb(98, 102, 244);
-            panel4.Controls.Add(pictureBox4);
-            panel4.Controls.Add(lblInProgressCount);
-            panel4.Controls.Add(lblInProgress);
-            panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(687, 0);
-            panel4.Margin = new Padding(0, 0, 10, 10);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(219, 80);
-            panel4.TabIndex = 3;
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(6, 5);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(70, 70);
-            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox4.TabIndex = 3;
-            pictureBox4.TabStop = false;
-            // 
-            // lblInProgressCount
-            // 
-            lblInProgressCount.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblInProgressCount.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblInProgressCount.ForeColor = Color.White;
-            lblInProgressCount.Location = new Point(82, 47);
-            lblInProgressCount.Name = "lblInProgressCount";
-            lblInProgressCount.Size = new Size(134, 25);
-            lblInProgressCount.TabIndex = 1;
-            lblInProgressCount.Text = "00";
-            lblInProgressCount.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // lblInProgress
-            // 
-            lblInProgress.AutoSize = true;
-            lblInProgress.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblInProgress.ForeColor = Color.White;
-            lblInProgress.Location = new Point(74, 4);
-            lblInProgress.Name = "lblInProgress";
-            lblInProgress.Size = new Size(129, 20);
-            lblInProgress.TabIndex = 0;
-            lblInProgress.Text = "Total In Progress";
-            // 
-            // panel3
-            // 
-            panel3.BackColor = Color.FromArgb(255, 74, 130);
-            panel3.Controls.Add(pictureBox3);
-            panel3.Controls.Add(lblPendingCount);
-            panel3.Controls.Add(lblPending);
-            panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(458, 0);
-            panel3.Margin = new Padding(0, 0, 10, 10);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(219, 80);
-            panel3.TabIndex = 2;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(6, 5);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(70, 70);
-            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox3.TabIndex = 3;
-            pictureBox3.TabStop = false;
-            // 
-            // lblPendingCount
-            // 
-            lblPendingCount.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblPendingCount.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblPendingCount.ForeColor = Color.White;
-            lblPendingCount.Location = new Point(82, 47);
-            lblPendingCount.Name = "lblPendingCount";
-            lblPendingCount.Size = new Size(134, 25);
-            lblPendingCount.TabIndex = 1;
-            lblPendingCount.Text = "00";
-            lblPendingCount.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // lblPending
-            // 
-            lblPending.AutoSize = true;
-            lblPending.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPending.ForeColor = Color.White;
-            lblPending.Location = new Point(72, 4);
-            lblPending.Name = "lblPending";
-            lblPending.Size = new Size(106, 20);
-            lblPending.TabIndex = 0;
-            lblPending.Text = "Total Pending";
             // 
             // panel2
             // 
@@ -701,6 +644,52 @@
             lblTodayTaskCount.TextAlign = ContentAlignment.MiddleRight;
             lblTodayTaskCount.Click += lblTodayTaskCount_Click;
             // 
+            // panel6
+            // 
+            panel6.BackColor = Color.FromArgb(255, 74, 130);
+            panel6.Controls.Add(pictureBox6);
+            panel6.Controls.Add(lblPendingCount);
+            panel6.Controls.Add(label5);
+            panel6.Dock = DockStyle.Fill;
+            panel6.Location = new Point(687, 0);
+            panel6.Margin = new Padding(0, 0, 10, 10);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(219, 80);
+            panel6.TabIndex = 10;
+            // 
+            // pictureBox6
+            // 
+            pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
+            pictureBox6.Location = new Point(6, 5);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(70, 70);
+            pictureBox6.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox6.TabIndex = 3;
+            pictureBox6.TabStop = false;
+            // 
+            // lblPendingCount
+            // 
+            lblPendingCount.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblPendingCount.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPendingCount.ForeColor = Color.White;
+            lblPendingCount.Location = new Point(77, 47);
+            lblPendingCount.Name = "lblPendingCount";
+            lblPendingCount.Size = new Size(139, 25);
+            lblPendingCount.TabIndex = 1;
+            lblPendingCount.Text = "00";
+            lblPendingCount.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(72, 4);
+            label5.Name = "label5";
+            label5.Size = new Size(106, 20);
+            label5.TabIndex = 0;
+            label5.Text = "Total Pending";
+            // 
             // frmDashboardAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -722,7 +711,6 @@
             panelDataGrid.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTasks).EndInit();
             panelRecentActivity.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)chart4).EndInit();
             tableLayoutPanelAnalyticsRow.ResumeLayout(false);
             tableLayoutPanelAnalyticsRow.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
@@ -732,21 +720,21 @@
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUserPerformance).EndInit();
             tableLayoutPanelSummaryCards.ResumeLayout(false);
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel6.ResumeLayout(false);
+            panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ResumeLayout(false);
         }
 
@@ -758,19 +746,12 @@
         private Label label1;
         private DataGridView dgvTasks;
         private Panel panelRecentActivity;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart4;
         private TableLayoutPanel tableLayoutPanelAnalyticsRow;
         private FlowLayoutPanel flowLayoutPanel1;
         private TableLayoutPanel tableLayoutPanelSummaryCards;
         private Panel panel5;
         private Label lblOverdueCount;
         private Label lblOverdue;
-        private Panel panel4;
-        private Label lblInProgressCount;
-        private Label lblInProgress;
-        private Panel panel3;
-        private Label lblPendingCount;
-        private Label lblPending;
         private Panel panel2;
         private Label lblTodayTaskCount;
         private Label lblTodayTask;
@@ -790,10 +771,17 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chartSummaryReport;
         private PictureBox pictureBox1;
         private PictureBox pictureBox5;
-        private PictureBox pictureBox4;
-        private PictureBox pictureBox3;
         private PictureBox pictureBox2;
         private DateTimePicker dtpStartDate;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartTopServices;
+        private GroupBox groupBox2;
+        private Panel panel4;
+        private PictureBox pictureBox4;
+        private Label lblCompletedCount;
+        private Label lblCompleted;
+        private Panel panel6;
+        private PictureBox pictureBox6;
+        private Label lblPendingCount;
+        private Label label5;
     }
 }

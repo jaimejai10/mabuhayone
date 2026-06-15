@@ -92,7 +92,7 @@ namespace Mabuhayone
                  WHERE status = 'pending') AS pending_tasks,
 
                 (SELECT COUNT(*) FROM tasks
-                 WHERE status = 'in_progress') AS in_progress_tasks,
+                 WHERE status = 'completed') AS complete_tasks,
 
                 (SELECT COUNT(*) FROM tasks
                  WHERE due_date < CURDATE()
@@ -112,8 +112,8 @@ namespace Mabuhayone
                  AND DATE(created_at) BETWEEN @start AND @end) AS pending_tasks,
 
                 (SELECT COUNT(*) FROM tasks
-                 WHERE status = 'in_progress'
-                 AND DATE(created_at) BETWEEN @start AND @end) AS in_progress_tasks,
+                 WHERE status = 'completed'
+                 AND DATE(created_at) BETWEEN @start AND @end) AS complete_tasks,
 
                 (SELECT COUNT(*) FROM tasks
                  WHERE due_date < CURDATE()
@@ -136,7 +136,7 @@ namespace Mabuhayone
                     {
                         DashboardCache.TotalTasks = Convert.ToInt32(reader["total_tasks"]);
                         DashboardCache.Pending = Convert.ToInt32(reader["pending_tasks"]);
-                        DashboardCache.InProgress = Convert.ToInt32(reader["in_progress_tasks"]);
+                        DashboardCache.Complete = Convert.ToInt32(reader["complete_tasks"]);
                         DashboardCache.Overdue = Convert.ToInt32(reader["overdue_tasks"]);
                     }
                 }
@@ -174,7 +174,7 @@ namespace Mabuhayone
             lblTotalTaskCount.Text = DashboardCache.TotalTasks.ToString();
             lblTodayTaskCount.Text = DashboardCache.TodayTasks.ToString();
             lblPendingCount.Text = DashboardCache.Pending.ToString();
-            lblInProgressCount.Text = DashboardCache.InProgress.ToString();
+            lblCompletedCount.Text = DashboardCache.Complete.ToString();
             lblOverdueCount.Text = DashboardCache.Overdue.ToString();
         }
 
@@ -368,13 +368,13 @@ namespace Mabuhayone
             int total = DashboardCache.TotalTasks;
             int today = DashboardCache.TodayTasks;
             int pending = DashboardCache.Pending;
-            int inProgress = DashboardCache.InProgress;
+            int complete = DashboardCache.Complete;
             int overdue = DashboardCache.Overdue;
 
             series.Points.AddXY("Total Tasks", total);
             series.Points.AddXY("Today Tasks", today);
             series.Points.AddXY("Pending", pending);
-            series.Points.AddXY("In Progress", inProgress);
+            series.Points.AddXY("Completed", complete);
             series.Points.AddXY("Overdue", overdue);
 
             // =========================
@@ -617,6 +617,11 @@ namespace Mabuhayone
         }
 
         private void lblFilterStatus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanelSummaryCards_Paint(object sender, PaintEventArgs e)
         {
 
         }

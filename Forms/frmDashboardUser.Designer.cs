@@ -33,18 +33,18 @@
             tableLayoutPanelAnalyticsRow = new TableLayoutPanel();
             flowLayoutPanel1 = new FlowLayoutPanel();
             tableLayoutPanelSummaryCards = new TableLayoutPanel();
-            panel5 = new Panel();
-            pictureBox5 = new PictureBox();
-            lblOverdueCount = new Label();
-            lblOverdue = new Label();
-            panel4 = new Panel();
-            pictureBox4 = new PictureBox();
-            lblInProgressCount = new Label();
-            lblInProgress = new Label();
             panel3 = new Panel();
             pictureBox3 = new PictureBox();
             lblPendingCount = new Label();
             lblPending = new Label();
+            panel4 = new Panel();
+            pictureBox4 = new PictureBox();
+            lblCompleted = new Label();
+            lblComplted = new Label();
+            panel5 = new Panel();
+            pictureBox5 = new PictureBox();
+            lblOverdueCount = new Label();
+            lblOverdue = new Label();
             panel2 = new Panel();
             pictureBox2 = new PictureBox();
             lblTotalTaskCount = new Label();
@@ -56,12 +56,12 @@
             panelContainer.SuspendLayout();
             tableLayoutPanelAnalyticsRow.SuspendLayout();
             tableLayoutPanelSummaryCards.SuspendLayout();
-            panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
-            panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
@@ -115,9 +115,9 @@
             tableLayoutPanelSummaryCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
             tableLayoutPanelSummaryCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
             tableLayoutPanelSummaryCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            tableLayoutPanelSummaryCards.Controls.Add(panel3, 3, 0);
+            tableLayoutPanelSummaryCards.Controls.Add(panel4, 2, 0);
             tableLayoutPanelSummaryCards.Controls.Add(panel5, 4, 0);
-            tableLayoutPanelSummaryCards.Controls.Add(panel4, 3, 0);
-            tableLayoutPanelSummaryCards.Controls.Add(panel3, 2, 0);
             tableLayoutPanelSummaryCards.Controls.Add(panel2, 1, 0);
             tableLayoutPanelSummaryCards.Controls.Add(panel1, 0, 0);
             tableLayoutPanelSummaryCards.Dock = DockStyle.Top;
@@ -127,6 +127,98 @@
             tableLayoutPanelSummaryCards.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanelSummaryCards.Size = new Size(1153, 90);
             tableLayoutPanelSummaryCards.TabIndex = 7;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.FromArgb(255, 74, 130);
+            panel3.Controls.Add(pictureBox3);
+            panel3.Controls.Add(lblPendingCount);
+            panel3.Controls.Add(lblPending);
+            panel3.Dock = DockStyle.Fill;
+            panel3.Location = new Point(690, 0);
+            panel3.Margin = new Padding(0, 0, 10, 10);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(220, 80);
+            panel3.TabIndex = 10;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(6, 5);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(70, 70);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 3;
+            pictureBox3.TabStop = false;
+            // 
+            // lblPendingCount
+            // 
+            lblPendingCount.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblPendingCount.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPendingCount.ForeColor = Color.White;
+            lblPendingCount.Location = new Point(82, 47);
+            lblPendingCount.Name = "lblPendingCount";
+            lblPendingCount.Size = new Size(134, 25);
+            lblPendingCount.TabIndex = 1;
+            lblPendingCount.Text = "00";
+            lblPendingCount.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lblPending
+            // 
+            lblPending.AutoSize = true;
+            lblPending.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPending.ForeColor = Color.White;
+            lblPending.Location = new Point(72, 4);
+            lblPending.Name = "lblPending";
+            lblPending.Size = new Size(106, 20);
+            lblPending.TabIndex = 0;
+            lblPending.Text = "Total Pending";
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.FromArgb(98, 102, 244);
+            panel4.Controls.Add(pictureBox4);
+            panel4.Controls.Add(lblCompleted);
+            panel4.Controls.Add(lblComplted);
+            panel4.Dock = DockStyle.Fill;
+            panel4.Location = new Point(460, 0);
+            panel4.Margin = new Padding(0, 0, 10, 10);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(220, 80);
+            panel4.TabIndex = 5;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
+            pictureBox4.Location = new Point(6, 5);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(70, 70);
+            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox4.TabIndex = 3;
+            pictureBox4.TabStop = false;
+            // 
+            // lblCompleted
+            // 
+            lblCompleted.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblCompleted.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCompleted.ForeColor = Color.White;
+            lblCompleted.Location = new Point(82, 47);
+            lblCompleted.Name = "lblCompleted";
+            lblCompleted.Size = new Size(134, 25);
+            lblCompleted.TabIndex = 1;
+            lblCompleted.Text = "00";
+            lblCompleted.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lblComplted
+            // 
+            lblComplted.AutoSize = true;
+            lblComplted.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblComplted.ForeColor = Color.White;
+            lblComplted.Location = new Point(74, 4);
+            lblComplted.Name = "lblComplted";
+            lblComplted.Size = new Size(116, 20);
+            lblComplted.TabIndex = 0;
+            lblComplted.Text = "Total Complete";
             // 
             // panel5
             // 
@@ -173,98 +265,6 @@
             lblOverdue.Size = new Size(108, 20);
             lblOverdue.TabIndex = 0;
             lblOverdue.Text = "Total Overdue";
-            // 
-            // panel4
-            // 
-            panel4.BackColor = Color.FromArgb(98, 102, 244);
-            panel4.Controls.Add(pictureBox4);
-            panel4.Controls.Add(lblInProgressCount);
-            panel4.Controls.Add(lblInProgress);
-            panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(690, 0);
-            panel4.Margin = new Padding(0, 0, 10, 10);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(220, 80);
-            panel4.TabIndex = 3;
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(6, 5);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(70, 70);
-            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox4.TabIndex = 3;
-            pictureBox4.TabStop = false;
-            // 
-            // lblInProgressCount
-            // 
-            lblInProgressCount.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblInProgressCount.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblInProgressCount.ForeColor = Color.White;
-            lblInProgressCount.Location = new Point(80, 47);
-            lblInProgressCount.Name = "lblInProgressCount";
-            lblInProgressCount.Size = new Size(134, 25);
-            lblInProgressCount.TabIndex = 1;
-            lblInProgressCount.Text = "00";
-            lblInProgressCount.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // lblInProgress
-            // 
-            lblInProgress.AutoSize = true;
-            lblInProgress.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblInProgress.ForeColor = Color.White;
-            lblInProgress.Location = new Point(74, 4);
-            lblInProgress.Name = "lblInProgress";
-            lblInProgress.Size = new Size(129, 20);
-            lblInProgress.TabIndex = 0;
-            lblInProgress.Text = "Total In Progress";
-            // 
-            // panel3
-            // 
-            panel3.BackColor = Color.FromArgb(255, 74, 130);
-            panel3.Controls.Add(pictureBox3);
-            panel3.Controls.Add(lblPendingCount);
-            panel3.Controls.Add(lblPending);
-            panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(460, 0);
-            panel3.Margin = new Padding(0, 0, 10, 10);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(220, 80);
-            panel3.TabIndex = 2;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(6, 5);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(70, 70);
-            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox3.TabIndex = 3;
-            pictureBox3.TabStop = false;
-            // 
-            // lblPendingCount
-            // 
-            lblPendingCount.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblPendingCount.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblPendingCount.ForeColor = Color.White;
-            lblPendingCount.Location = new Point(81, 47);
-            lblPendingCount.Name = "lblPendingCount";
-            lblPendingCount.Size = new Size(134, 25);
-            lblPendingCount.TabIndex = 1;
-            lblPendingCount.Text = "00";
-            lblPendingCount.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // lblPending
-            // 
-            lblPending.AutoSize = true;
-            lblPending.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPending.ForeColor = Color.White;
-            lblPending.Location = new Point(72, 4);
-            lblPending.Name = "lblPending";
-            lblPending.Size = new Size(106, 20);
-            lblPending.TabIndex = 0;
-            lblPending.Text = "Total Pending";
             // 
             // panel2
             // 
@@ -365,22 +365,22 @@
             ClientSize = new Size(1173, 527);
             Controls.Add(panelContainer);
             Name = "frmDashboardUser";
-            Text = "frmDashboardUser";
+            Text = "Dashboard";
             Load += frmDashboardUser_Load;
             panelContainer.ResumeLayout(false);
             panelContainer.PerformLayout();
             tableLayoutPanelAnalyticsRow.ResumeLayout(false);
             tableLayoutPanelAnalyticsRow.PerformLayout();
             tableLayoutPanelSummaryCards.ResumeLayout(false);
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
@@ -400,14 +400,6 @@
         private PictureBox pictureBox5;
         private Label lblOverdueCount;
         private Label lblOverdue;
-        private Panel panel4;
-        private PictureBox pictureBox4;
-        private Label lblInProgressCount;
-        private Label lblInProgress;
-        private Panel panel3;
-        private PictureBox pictureBox3;
-        private Label lblPendingCount;
-        private Label lblPending;
         private Panel panel2;
         private PictureBox pictureBox2;
         private Label lblTotalTaskCount;
@@ -416,5 +408,13 @@
         private PictureBox pictureBox1;
         private Label lblTodayTask;
         private Label lblTodayTaskCount;
+        private Panel panel4;
+        private PictureBox pictureBox4;
+        private Label lblCompleted;
+        private Label lblComplted;
+        private Panel panel3;
+        private PictureBox pictureBox3;
+        private Label lblPendingCount;
+        private Label lblPending;
     }
 }

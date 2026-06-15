@@ -27,7 +27,7 @@ namespace Mabuhayone
             CollapseMenu();
 
             leftBorderBtn = new Panel();
-            leftBorderBtn.Size = new Size(7, 60);
+            leftBorderBtn.Size = new Size(7, 40);
             panelMenu.Controls.Add(leftBorderBtn);
 
             //Navigation
@@ -128,7 +128,7 @@ namespace Mabuhayone
             {
                 OpenChildForm(new frmDashboardAdmin());
                 ActivateButton(btnDashboard, RGBColors.color1);
-                btnApplyLeave.Visible = false;
+                btnHRDepartment.Visible = false;
             }
             else if (UserSession.Role == "employee")
             {
@@ -148,7 +148,7 @@ namespace Mabuhayone
             panelMenu.Controls.SetChildIndex(btnManageUsers, 5);
             panelMenu.Controls.SetChildIndex(btnManageCompanies, 4);
             panelMenu.Controls.SetChildIndex(btnTask, 3);
-            panelMenu.Controls.SetChildIndex(btnApplyLeave, 2);
+            panelMenu.Controls.SetChildIndex(btnHRDepartment, 2);
             panelMenu.Controls.SetChildIndex(btnSettings, 1);
             panelMenu.Controls.SetChildIndex(btnProfile, 0);
         }

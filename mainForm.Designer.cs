@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             panelMenu = new Panel();
-            btnApplyLeave = new FontAwesome.Sharp.IconButton();
+            btnHRDepartment = new FontAwesome.Sharp.IconButton();
             btnLogout = new FontAwesome.Sharp.IconButton();
             btnProfile = new FontAwesome.Sharp.IconButton();
             btnSettings = new FontAwesome.Sharp.IconButton();
@@ -64,7 +64,7 @@
             // panelMenu
             // 
             panelMenu.BackColor = Color.FromArgb(98, 102, 244);
-            panelMenu.Controls.Add(btnApplyLeave);
+            panelMenu.Controls.Add(btnHRDepartment);
             panelMenu.Controls.Add(btnLogout);
             panelMenu.Controls.Add(btnProfile);
             panelMenu.Controls.Add(btnSettings);
@@ -80,28 +80,28 @@
             panelMenu.TabIndex = 0;
             panelMenu.Paint += panelMenu_Paint;
             // 
-            // btnApplyLeave
+            // btnHRDepartment
             // 
-            btnApplyLeave.Cursor = Cursors.Hand;
-            btnApplyLeave.Dock = DockStyle.Top;
-            btnApplyLeave.FlatAppearance.BorderSize = 0;
-            btnApplyLeave.FlatStyle = FlatStyle.Flat;
-            btnApplyLeave.Font = new Font("Verdana", 9F);
-            btnApplyLeave.ForeColor = Color.White;
-            btnApplyLeave.IconChar = FontAwesome.Sharp.IconChar.CalendarDays;
-            btnApplyLeave.IconColor = Color.White;
-            btnApplyLeave.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnApplyLeave.IconSize = 25;
-            btnApplyLeave.ImageAlign = ContentAlignment.MiddleLeft;
-            btnApplyLeave.Location = new Point(0, 391);
-            btnApplyLeave.Name = "btnApplyLeave";
-            btnApplyLeave.Padding = new Padding(10, 0, 10, 0);
-            btnApplyLeave.Size = new Size(190, 50);
-            btnApplyLeave.TabIndex = 8;
-            btnApplyLeave.Tag = "Apply Leave";
-            btnApplyLeave.Text = "Apply Leave";
-            btnApplyLeave.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnApplyLeave.UseVisualStyleBackColor = true;
+            btnHRDepartment.Cursor = Cursors.Hand;
+            btnHRDepartment.Dock = DockStyle.Top;
+            btnHRDepartment.FlatAppearance.BorderSize = 0;
+            btnHRDepartment.FlatStyle = FlatStyle.Flat;
+            btnHRDepartment.Font = new Font("Verdana", 9F);
+            btnHRDepartment.ForeColor = Color.White;
+            btnHRDepartment.IconChar = FontAwesome.Sharp.IconChar.ClipboardUser;
+            btnHRDepartment.IconColor = Color.White;
+            btnHRDepartment.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnHRDepartment.IconSize = 25;
+            btnHRDepartment.ImageAlign = ContentAlignment.MiddleLeft;
+            btnHRDepartment.Location = new Point(0, 331);
+            btnHRDepartment.Name = "btnHRDepartment";
+            btnHRDepartment.Padding = new Padding(10, 0, 10, 0);
+            btnHRDepartment.Size = new Size(190, 40);
+            btnHRDepartment.TabIndex = 8;
+            btnHRDepartment.Tag = "HR Department";
+            btnHRDepartment.Text = "HR Department";
+            btnHRDepartment.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnHRDepartment.UseVisualStyleBackColor = true;
             // 
             // btnLogout
             // 
@@ -116,7 +116,7 @@
             btnLogout.IconSize = 30;
             btnLogout.ImageAlign = ContentAlignment.MiddleLeft;
             btnLogout.Location = new Point(0, 725);
-            btnLogout.Margin = new Padding(3, 3, 3, 30);
+            btnLogout.Margin = new Padding(3, 3, 3, 50);
             btnLogout.Name = "btnLogout";
             btnLogout.Padding = new Padding(10, 0, 0, 0);
             btnLogout.Size = new Size(190, 36);
@@ -140,10 +140,10 @@
             btnProfile.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnProfile.IconSize = 25;
             btnProfile.ImageAlign = ContentAlignment.MiddleLeft;
-            btnProfile.Location = new Point(0, 341);
+            btnProfile.Location = new Point(0, 291);
             btnProfile.Name = "btnProfile";
             btnProfile.Padding = new Padding(10, 0, 10, 0);
-            btnProfile.Size = new Size(190, 50);
+            btnProfile.Size = new Size(190, 40);
             btnProfile.TabIndex = 6;
             btnProfile.Tag = "Profile";
             btnProfile.Text = "Profile";
@@ -164,10 +164,10 @@
             btnSettings.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSettings.IconSize = 25;
             btnSettings.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSettings.Location = new Point(0, 291);
+            btnSettings.Location = new Point(0, 251);
             btnSettings.Name = "btnSettings";
             btnSettings.Padding = new Padding(10, 0, 10, 0);
-            btnSettings.Size = new Size(190, 50);
+            btnSettings.Size = new Size(190, 40);
             btnSettings.TabIndex = 5;
             btnSettings.Tag = "Settings";
             btnSettings.Text = "Settings";
@@ -188,10 +188,10 @@
             btnTask.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnTask.IconSize = 25;
             btnTask.ImageAlign = ContentAlignment.MiddleLeft;
-            btnTask.Location = new Point(0, 241);
+            btnTask.Location = new Point(0, 211);
             btnTask.Name = "btnTask";
             btnTask.Padding = new Padding(10, 0, 10, 0);
-            btnTask.Size = new Size(190, 50);
+            btnTask.Size = new Size(190, 40);
             btnTask.TabIndex = 4;
             btnTask.Tag = "All Tasks";
             btnTask.Text = "All Tasks";
@@ -212,10 +212,10 @@
             btnManageUsers.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnManageUsers.IconSize = 25;
             btnManageUsers.ImageAlign = ContentAlignment.MiddleLeft;
-            btnManageUsers.Location = new Point(0, 191);
+            btnManageUsers.Location = new Point(0, 171);
             btnManageUsers.Name = "btnManageUsers";
             btnManageUsers.Padding = new Padding(10, 0, 10, 0);
-            btnManageUsers.Size = new Size(190, 50);
+            btnManageUsers.Size = new Size(190, 40);
             btnManageUsers.TabIndex = 3;
             btnManageUsers.Tag = "Manage Users";
             btnManageUsers.Text = "Manage Users";
@@ -236,10 +236,10 @@
             btnManageCompanies.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnManageCompanies.IconSize = 25;
             btnManageCompanies.ImageAlign = ContentAlignment.MiddleLeft;
-            btnManageCompanies.Location = new Point(0, 141);
+            btnManageCompanies.Location = new Point(0, 131);
             btnManageCompanies.Name = "btnManageCompanies";
             btnManageCompanies.Padding = new Padding(10, 0, 10, 0);
-            btnManageCompanies.Size = new Size(190, 50);
+            btnManageCompanies.Size = new Size(190, 40);
             btnManageCompanies.TabIndex = 2;
             btnManageCompanies.Tag = "Manage Companies";
             btnManageCompanies.Text = "Manage Companies";
@@ -262,7 +262,7 @@
             btnDashboard.Location = new Point(0, 91);
             btnDashboard.Name = "btnDashboard";
             btnDashboard.Padding = new Padding(10, 0, 10, 0);
-            btnDashboard.Size = new Size(190, 50);
+            btnDashboard.Size = new Size(190, 40);
             btnDashboard.TabIndex = 1;
             btnDashboard.Tag = "Dashboard";
             btnDashboard.Text = "Dashboard";
@@ -536,6 +536,6 @@
         private Label lblPosition;
         private FontAwesome.Sharp.IconButton iconButton8;
         private FontAwesome.Sharp.IconPictureBox iconCurrentChildForm;
-        private FontAwesome.Sharp.IconButton btnApplyLeave;
+        private FontAwesome.Sharp.IconButton btnHRDepartment;
     }
 }
